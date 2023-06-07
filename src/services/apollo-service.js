@@ -13,7 +13,9 @@ export const GET_EMPLOYEES = gql`
                 }
             data {
                 employees {
+                id
                     name
+                    lastname
                     }
             }
         }
@@ -25,20 +27,26 @@ export const useEmployees = (withLazy) => {
 }
 
 export const GET_EMPLOYEE = gql`
-    query getEmployeeById($id: ID!) {
-        employees(id: $id) {
-            id
-            name
-            lastname    
+    query GetEmployee($id: ID!) {
+        getEmployeeData(id: $id) {
+            employee {
+                id
+                name
+                lastname
+                beginDate
+                endDate
+                registrationStatus
+                area
+            }
         }
     }
 `;
 
 //employee hook
 export const useEmployee = (id) => {
-    useQuery(GET_EMPLOYEE, {
+    return useQuery(GET_EMPLOYEE, {
         variables: {
-            id
+            id,
         }
     });
 }

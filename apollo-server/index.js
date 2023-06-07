@@ -1,5 +1,29 @@
+
+const { ApolloServer, gql } = require('apollo-server');
 const casual = require("casual");
-const { ApolloServer, gql, MockList } = require('apollo-server');
+
+const EMPLOYEE_DATA_MOCK = Object.freeze(
+    [
+        {
+            id: casual.uuid, name: casual.first_name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: "IT"
+        },
+        {
+            id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
+        },
+        {
+            id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "HHRR"
+        },
+        {
+            id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
+        },
+        {
+            id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "Accounting"
+        },
+        {
+            id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: null
+        },
+    ]
+);
 
 const typeDefs = gql`
 directive @oneOf(values: [String!]!) on FIELD_DEFINITION
@@ -22,6 +46,7 @@ type Employee {
 
 type Query {
     getEmployeesData: GetEmployeesData!
+    getEmployeeData(id: ID!): GetEmployeeData!
 }
 
 type GetEmployeesData {
@@ -31,6 +56,10 @@ type GetEmployeesData {
 
 type EmployeesData {
     employees: [Employee!]
+}
+
+type GetEmployeeData {
+    employee: Employee!
 }
 
 type ResponseInfo {
@@ -51,36 +80,30 @@ const resolvers = {
         getEmployeesData: () => {
             const data =
             {
-                employees: [
-                    {
-                        id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: "IT"
-                    },
-                    {
-                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
-                    },
-                    {
-                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "HHRR"
-                    },
-                    {
-                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
-                    },
-                    {
-                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "Accounting"
-                    },
-                    {
-                        id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: null
-                    },
-                ],
+                employees: EMPLOYEE_DATA_MOCK,
             }
 
             const info = { resultCount: data.employees.length };
-            
+
             return {
                 info,
                 data,
             }
+        },
+        getEmployeeData: (parent, args) => {
+            console.log(args.id);
+            console.log(EMPLOYEE_DATA_MOCK)
+            const employee = EMPLOYEE_DATA_MOCK.find(e => e.id === args.id);
+            console.log(employee);
+
+            return {
+                employee: employee
+            }
         }
     },
+    // Mutation: {
+
+    // }
 };
 
 function oneOfDirective(values) {

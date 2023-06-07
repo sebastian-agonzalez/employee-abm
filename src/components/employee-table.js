@@ -1,5 +1,6 @@
 'use client';
 import { useEmployees } from '@/services/apollo-service';
+import Link from 'next/link';
 
 const EmployeeTable = () => {
     const { loading, error, data } = useEmployees();
@@ -9,10 +10,10 @@ const EmployeeTable = () => {
 
 
     return data.getEmployeesData.data.employees.map(({ id, name, lastname }) => (
-        <div key={id}>
-            <h2>{id}</h2>
-            <h3>{name}</h3>
-            <h4>{lastname}</h4>
+        <div>
+            <Link href={`/employees/${id}`}>{id}</Link>
+            <p>{name}</p>
+            <p>{lastname}</p>
         </div>
     ));
 }
