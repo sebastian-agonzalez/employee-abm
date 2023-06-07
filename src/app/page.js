@@ -1,4 +1,5 @@
 'use client';
+import EmployeeTable from '@/components/employee-table';
 import  styles from './page.module.css'
 
 export default function Home() {
@@ -17,6 +18,11 @@ export default function Home() {
                         <li className='m-2'><a href="/contact">Contact</a></li>
                     </ul>
                 </nav>
+                <section>
+                    <div>
+                        <EmployeeTable></EmployeeTable>
+                    </div>
+                </section>
             </header>
         </>
     )

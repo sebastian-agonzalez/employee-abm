@@ -19,35 +19,67 @@ type Employee {
     area: String
         @oneOf(values: ["IT", "HHRR", "Accounting", "Customer Care"])
 }
+
 type Query {
+    getEmployeesData: GetEmployeesData!
+}
+
+type GetEmployeesData {
+    info: ResponseInfo!
+    data: EmployeesData!
+}
+
+type EmployeesData {
     employees: [Employee!]
+}
+
+type ResponseInfo {
+    resultCount: Int!
 }
 `;
 
+// mutation UpdateEmployee($input: UpdateEmployeeInput!) {
+//     updateEmployee(input: $input) {
+//       id
+//       name
+//       position
+//       department
+//       salary
+//     }
 const resolvers = {
     Query: {
-        employees: () => {
-            return [
-                {
-                    id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: "IT"
-                },
-                {
-                    id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
-                },
-                {
-                    id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "HHRR"
-                },
-                {
-                    id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
-                },
-                {
-                    id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "Accounting"
-                },
-                {
-                    id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: null
-                },
-            ]
-        },
+        getEmployeesData: () => {
+            const data =
+            {
+                employees: [
+                    {
+                        id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: "IT"
+                    },
+                    {
+                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
+                    },
+                    {
+                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "HHRR"
+                    },
+                    {
+                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
+                    },
+                    {
+                        id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "Accounting"
+                    },
+                    {
+                        id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: null
+                    },
+                ],
+            }
+
+            const info = { resultCount: data.employees.length };
+            
+            return {
+                info,
+                data,
+            }
+        }
     },
 };
 
@@ -89,5 +121,5 @@ const server = new ApolloServer({
 });
 
 server.listen().then(({ url }) => {
-    console.log(`Server ready at ${url}`);
+    console.log(`Server ready at ${url} `);
 });
