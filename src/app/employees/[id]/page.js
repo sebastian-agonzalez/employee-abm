@@ -8,8 +8,7 @@ const EmployeeShow = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message}</p>;
     if (data) console.log(data);
-    //console.log(useRouter());
-    console.log(params);
+
     return (
         <>
             <p>{params.id}</p>

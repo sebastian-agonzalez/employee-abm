@@ -13,9 +13,14 @@ export const GET_EMPLOYEES = gql`
                 }
             data {
                 employees {
-                id
+                    id
                     name
                     lastname
+                    lastname
+                    beginDate
+                    endDate
+                    registrationStatus
+                    area
                     }
             }
         }
