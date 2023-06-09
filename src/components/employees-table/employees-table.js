@@ -32,7 +32,7 @@ const EmployeeTable = () => {
     return employees && (
         <>
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg m-8">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 my-6">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="bg-gradient-to-r from-blue-500 to-pink-700 bg-opacity-10 text-xs text-white uppercase">
                         <tr>

@@ -24,7 +24,7 @@ export const GET_EMPLOYEES = gql`
                     }
             }
         }
-    } `;
+    }`;
 
 //employees query hook
 export const useEmployees = (withLazy) => {
@@ -44,8 +44,7 @@ export const GET_EMPLOYEE = gql`
                 area
             }
         }
-    }
-`;
+    }`;
 
 //employee hook
 export const useEmployee = (id) => {
@@ -54,4 +53,26 @@ export const useEmployee = (id) => {
             id,
         }
     });
+}
+
+export const GET_ACTIVE_WORKFORCE = gql`
+    { 
+        getActiveEmployeesCount {
+            resultCount
+        }
+    }`;
+
+export const useActiveWorkforce = () => {
+    return useQuery(GET_ACTIVE_WORKFORCE);
+}
+
+export const GET_CURRENT_WORKFORCE = gql`
+    { 
+        getCurrentEmployeesCount {
+            resultCount
+        }
+    }`;
+
+export const useCurrentWorkforce = () => {
+    return useQuery(GET_CURRENT_WORKFORCE);
 }

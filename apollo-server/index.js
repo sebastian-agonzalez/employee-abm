@@ -8,7 +8,7 @@ const EMPLOYEE_DATA_MOCK = Object.freeze(
             id: casual.uuid, name: casual.first_name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: "IT"
         },
         {
-            id: casual.uuid, name: casual.first_name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
+            id: casual.uuid, name: casual.first_name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: casual.date('YYYY-MM-DD'), registrationStatus: "COMPLETE", area: "IT"
         },
         {
             id: casual.uuid, name: casual.first_name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "HHRR"
@@ -20,7 +20,7 @@ const EMPLOYEE_DATA_MOCK = Object.freeze(
             id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "Accounting"
         },
         {
-            id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: null
+            id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: casual.date('YYYY-MM-DD'), registrationStatus: "PENDING", area: null
         },
     ]
 );
@@ -47,13 +47,15 @@ type Employee {
 type Query {
     getEmployeesData: GetEmployeesData!
     getEmployeeData(id: ID!): GetEmployeeData!
+    getEmployee(regStatus: RegStatus!): GetEmployeeData
+    getActiveEmployeesCount: ResponseInfo!
+    getCurrentEmployeesCount: ResponseInfo!
 }
 
 type GetEmployeesData {
     info: ResponseInfo!
     data: EmployeesData!
 }
-
 type EmployeesData {
     employees: [Employee!]
 }
@@ -88,9 +90,19 @@ const resolvers = {
                 data,
             }
         },
+        getActiveEmployeesCount: () => {
+            return {
+                resultCount: EMPLOYEE_DATA_MOCK.filter(e => !e.endDate).length
+            }
+        },
+        getCurrentEmployeesCount: () => {
+            return {
+                resultCount: EMPLOYEE_DATA_MOCK.length
+            }
+        },
         getEmployeeData: (parent, args) => {
             //console.log(args.id);
-           // console.log(EMPLOYEE_DATA_MOCK)
+            // console.log(EMPLOYEE_DATA_MOCK)
             const employee = EMPLOYEE_DATA_MOCK.find(e => e.id === args.id);
             //console.log(employee);
             return {
