@@ -62,6 +62,7 @@ export const GET_ACTIVE_WORKFORCE = gql`
         }
     }`;
 
+//get empleyees without endDate
 export const useActiveWorkforce = () => {
     return useQuery(GET_ACTIVE_WORKFORCE);
 }
@@ -72,7 +73,18 @@ export const GET_CURRENT_WORKFORCE = gql`
             resultCount
         }
     }`;
-
+//get total employees 
 export const useCurrentWorkforce = () => {
     return useQuery(GET_CURRENT_WORKFORCE);
+}
+
+export const GET_PENDING_EMPLOYEES = gql`
+    { 
+        getPendingEmployeesCount {
+            resultCount
+        }
+    }`;
+//get total employees 
+export const usePendingEmployees = () => {
+    return useQuery(GET_PENDING_EMPLOYEES);
 }

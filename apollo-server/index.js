@@ -50,6 +50,7 @@ type Query {
     getEmployee(regStatus: RegStatus!): GetEmployeeData
     getActiveEmployeesCount: ResponseInfo!
     getCurrentEmployeesCount: ResponseInfo!
+    getPendingEmployeesCount: ResponseInfo!
 }
 
 type GetEmployeesData {
@@ -98,6 +99,11 @@ const resolvers = {
         getCurrentEmployeesCount: () => {
             return {
                 resultCount: EMPLOYEE_DATA_MOCK.length
+            }
+        },
+        getPendingEmployeesCount: () => {
+            return {
+                resultCount: EMPLOYEE_DATA_MOCK.filter(e => e.registrationStatus != "COMPLETE").length
             }
         },
         getEmployeeData: (parent, args) => {
