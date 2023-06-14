@@ -45,12 +45,12 @@ type Employee {
 }
 
 type Query {
-    getEmployeesData: GetEmployeesData!
-    getEmployeeData(id: ID!): GetEmployeeData!
+    employeesData: GetEmployeesData!
+    employeeData(id: ID!): GetEmployeeData!
     getEmployee(regStatus: RegStatus!): GetEmployeeData
-    getActiveEmployeesCount: ResponseInfo!
-    getCurrentEmployeesCount: ResponseInfo!
-    getPendingEmployeesCount: ResponseInfo!
+    activeEmployeesCount: ResponseInfo!
+    currentEmployeesCount: ResponseInfo!
+    pendingEmployeesCount: ResponseInfo!
 }
 
 type GetEmployeesData {
@@ -80,7 +80,7 @@ type ResponseInfo {
 //     }
 const resolvers = {
     Query: {
-        getEmployeesData: () => {
+        employeesData: () => {
             const data =
             {
                 employees: EMPLOYEE_DATA_MOCK,
@@ -91,22 +91,22 @@ const resolvers = {
                 data,
             }
         },
-        getActiveEmployeesCount: () => {
+        activeEmployeesCount: () => {
             return {
                 resultCount: EMPLOYEE_DATA_MOCK.filter(e => !e.endDate).length
             }
         },
-        getCurrentEmployeesCount: () => {
+        currentEmployeesCount: () => {
             return {
                 resultCount: EMPLOYEE_DATA_MOCK.length
             }
         },
-        getPendingEmployeesCount: () => {
+        pendingEmployeesCount: () => {
             return {
                 resultCount: EMPLOYEE_DATA_MOCK.filter(e => e.registrationStatus != "COMPLETE").length
             }
         },
-        getEmployeeData: (parent, args) => {
+        employeeData: (parent, args) => {
             //console.log(args.id);
             // console.log(EMPLOYEE_DATA_MOCK)
             const employee = EMPLOYEE_DATA_MOCK.find(e => e.id === args.id);

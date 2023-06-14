@@ -7,7 +7,7 @@ const EmployeeShow = () => {
     const { loading, error, data } = useEmployee(params.id);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message}</p>;
-    if (data) console.log(data);
+    //if (data) console.log(data);
 
     return (
         <>

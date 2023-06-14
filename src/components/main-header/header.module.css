@@ -1,10 +1,13 @@
 .header-main {
   font-size: larger;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.308);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.135);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 40px 40px;
+  padding-bottom: 9px;
 }
 
 .gradient-text {
-  background-image: linear-gradient(to right, #ff00cc, #9b09a5, #333399);
+  background-image: linear-gradient(to right, #ff00cc, #9b09a5, #3a3aac);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;

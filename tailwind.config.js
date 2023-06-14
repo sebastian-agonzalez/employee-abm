@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        "./node_modules/flowbite-react/**/*.js",
+        'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-        "./node_modules/flowbite/**/*.js"
+        
     ],
     theme: {
         extend: {
@@ -15,10 +15,13 @@ module.exports = {
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
         },
-        colors: {
-            warning: '#fbbf24',
-            danger: '#dc2626',
-            success: '#10b981'
+        extend: {
+            colors: {
+                primary: '#3a3aac',
+                warning: '#fbbf24',
+                danger: '#dc2626',
+                success: '#10b981'
+            }
         }
     },
     plugins: [require("flowbite/plugin")],

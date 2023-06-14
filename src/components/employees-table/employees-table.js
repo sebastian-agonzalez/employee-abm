@@ -26,7 +26,7 @@ const EmployeeTable = () => {
         </div>)
     if (error) return <p>Error : {error.message}</p>;
     if (data) {
-        employees = new EmployeesData(data.getEmployeesData.data.employees).getData();
+        employees = new EmployeesData(data.employeesData.data.employees).getData();
     }
 
     return employees && (

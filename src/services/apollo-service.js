@@ -7,7 +7,7 @@ export const ApolloService = new ApolloClient({
 
 export const GET_EMPLOYEES = gql`
     {
-        getEmployeesData {
+        employeesData {
             info {
                 resultCount
                 }
@@ -33,7 +33,7 @@ export const useEmployees = (withLazy) => {
 
 export const GET_EMPLOYEE = gql`
     query GetEmployee($id: ID!) {
-        getEmployeeData(id: $id) {
+        employeeData(id: $id) {
             employee {
                 id
                 name
@@ -57,7 +57,7 @@ export const useEmployee = (id) => {
 
 export const GET_ACTIVE_WORKFORCE = gql`
     { 
-        getActiveEmployeesCount {
+        activeEmployeesCount {
             resultCount
         }
     }`;
@@ -69,7 +69,7 @@ export const useActiveWorkforce = () => {
 
 export const GET_CURRENT_WORKFORCE = gql`
     { 
-        getCurrentEmployeesCount {
+        currentEmployeesCount {
             resultCount
         }
     }`;
@@ -80,7 +80,7 @@ export const useCurrentWorkforce = () => {
 
 export const GET_PENDING_EMPLOYEES = gql`
     { 
-        getPendingEmployeesCount {
+        pendingEmployeesCount {
             resultCount
         }
     }`;
