@@ -2,9 +2,9 @@
   "name": "apollo-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "nodemon index.js localhost 4000",
+    "start": "nodemon src/index.js localhost 4000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

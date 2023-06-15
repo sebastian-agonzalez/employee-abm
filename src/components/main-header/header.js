@@ -7,7 +7,6 @@ import { Avatar } from 'flowbite-react';
 
 export const Header = () => {
     const { contextState } = useContext(EmployeeDataContext);
-    //console.log('header', contextState);
 
     return (
         <header className={`${styles['header-main']} pt-3 px-4 bg-transparent rounded-b rounded-lg`}>

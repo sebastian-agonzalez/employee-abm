@@ -1,9 +1,11 @@
 import { EMPLOYEE_AREA } from '@/variables/employee';
 import { DatePicker } from '@mui/x-date-pickers';
-import { ErrorMessage, useFormik } from 'formik';
+import { useFormik } from 'formik';
+import { useEffect } from 'react';
 import * as Yup from 'yup';
 
-export const EmployeeCreateForm = () => {
+export const EmployeeCreateForm = ({ resetForm, handleSubmit }) => {
+
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -19,13 +21,17 @@ export const EmployeeCreateForm = () => {
             lastName: Yup.string()
                 .max(15, 'Must be 20 characters or less')
                 .required('Required'),
-            area: Yup.string().required('Required')
+            area: Yup.string()
         }),
         onSubmit: values => {
-            console.log(values)
-            alert(JSON.stringify(values, null, 2));
+            handleSubmit(values);
+            console.log('form values', values);
         },
     });
+
+    useEffect(() => {
+        if (resetForm) formik.resetForm();
+    }, [resetForm]);
 
     return (
         <div className="px-8 py-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

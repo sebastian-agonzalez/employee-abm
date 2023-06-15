@@ -1,8 +1,9 @@
 
 const { ApolloServer, gql } = require('apollo-server');
 const casual = require("casual");
+const Employee = require('./models/employee');
 
-const EMPLOYEE_DATA_MOCK = Object.freeze(
+const EMPLOYEE_DATA_MOCK =
     [
         {
             id: casual.uuid, name: casual.first_name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "PENDING", area: "IT"
@@ -23,7 +24,7 @@ const EMPLOYEE_DATA_MOCK = Object.freeze(
             id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: casual.date('YYYY-MM-DD'), registrationStatus: "PENDING", area: null
         },
     ]
-);
+    ;
 
 const typeDefs = gql`
 directive @oneOf(values: [String!]!) on FIELD_DEFINITION
@@ -53,6 +54,11 @@ type Query {
     pendingEmployeesCount: ResponseInfo!
 }
 
+type Mutation {
+  createEmployee(data: EmployeeInput!): Employee!
+  # Additional mutations...
+}
+
 type GetEmployeesData {
     info: ResponseInfo!
     data: EmployeesData!
@@ -63,6 +69,14 @@ type EmployeesData {
 
 type GetEmployeeData {
     employee: Employee!
+}
+
+input EmployeeInput {
+    name: String!
+    lastname: String!
+    beginDate: String
+    endDate: String
+    area: String
 }
 
 type ResponseInfo {
@@ -78,6 +92,8 @@ type ResponseInfo {
 //       department
 //       salary
 //     }
+
+//resolvers mock
 const resolvers = {
     Query: {
         employeesData: () => {
@@ -107,18 +123,20 @@ const resolvers = {
             }
         },
         employeeData: (parent, args) => {
-            //console.log(args.id);
-            // console.log(EMPLOYEE_DATA_MOCK)
             const employee = EMPLOYEE_DATA_MOCK.find(e => e.id === args.id);
-            //console.log(employee);
             return {
                 employee: employee
             }
         }
     },
-    // Mutation: {
-
-    // }
+    Mutation: {
+        createEmployee: (_, args) => {
+             console.log(args);
+            const employee = new Employee(args.data);
+            EMPLOYEE_DATA_MOCK.push(employee);
+            return employee
+        }
+    }
 };
 
 function oneOfDirective(values) {

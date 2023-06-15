@@ -1,5 +1,5 @@
 'use client';
-import { ApolloClient, InMemoryCache, gql, useLazyQuery, useQuery } from '@apollo/client';
+import { ApolloClient, InMemoryCache, gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
 export const ApolloService = new ApolloClient({
     uri: 'http://localhost:4000/',
     cache: new InMemoryCache(),
@@ -31,6 +31,7 @@ export const useEmployees = (withLazy) => {
     return withLazy ? useLazyQuery(GET_EMPLOYEES) : useQuery(GET_EMPLOYEES);
 }
 
+//employee query
 export const GET_EMPLOYEE = gql`
     query GetEmployee($id: ID!) {
         employeeData(id: $id) {
@@ -55,6 +56,7 @@ export const useEmployee = (id) => {
     });
 }
 
+//get empleyees without endDate query
 export const GET_ACTIVE_WORKFORCE = gql`
     { 
         activeEmployeesCount {
@@ -62,29 +64,50 @@ export const GET_ACTIVE_WORKFORCE = gql`
         }
     }`;
 
-//get empleyees without endDate
+//get empleyees without endDate hook
 export const useActiveWorkforce = () => {
     return useQuery(GET_ACTIVE_WORKFORCE);
 }
 
+//get total employees query
 export const GET_CURRENT_WORKFORCE = gql`
     { 
         currentEmployeesCount {
             resultCount
         }
     }`;
-//get total employees 
+//get total employees hook
 export const useCurrentWorkforce = () => {
     return useQuery(GET_CURRENT_WORKFORCE);
 }
-
+//get pending employees query
 export const GET_PENDING_EMPLOYEES = gql`
     { 
         pendingEmployeesCount {
             resultCount
         }
     }`;
-//get total employees 
+
+//get pending employees 
 export const usePendingEmployees = () => {
     return useQuery(GET_PENDING_EMPLOYEES);
 }
+
+//new employee mutation
+export const POSTPUT_EMPLOYEE = gql`
+     mutation createEmployee($data: EmployeeInput!) {
+        createEmployee(data: $data) {
+                id
+                name
+                lastname
+                beginDate
+                endDate
+                registrationStatus
+                area
+            }
+        }`;
+
+export const useCreateEmployee = () => {
+    return useMutation(POSTPUT_EMPLOYEE);
+}
+
