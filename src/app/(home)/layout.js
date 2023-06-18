@@ -8,10 +8,14 @@ export default function HomeLayout({ children }) {
     return (
         <>
             <Header></Header>
-            <main className='h-full' >
-                <section className='h-full'>
+            <main className='h-full my-1 bg-gradient-to-r from-pink-300 to-blue-300 flex flex-col' >
+                <section className=' bg-white'>
                     <EmployeeBar></EmployeeBar>
-                    {children}
+                </section>
+                <section className='grid-bg flex-1'>
+                    <div className='my-6 py-2'>
+                        {children}
+                    </div>
                 </section>
             </main>
         </>

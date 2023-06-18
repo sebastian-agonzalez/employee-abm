@@ -10,7 +10,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
-    //console.log('root layout');
     return (
         <html lang="en">
             <head>

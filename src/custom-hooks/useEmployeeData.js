@@ -5,7 +5,6 @@ import { useContext } from 'react';
 import { EmployeeDataContext } from '@/context/employeesDataContext';
 
 const useEmployeeData = () => {
-    //console.log('enters useEmployeeData hook');
     const { contextState, updateContext } = useContext(EmployeeDataContext);
     const activeWorkForceResult = useActiveWorkforce();
     const currentWorkforceResult = useCurrentWorkforce();

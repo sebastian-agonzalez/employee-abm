@@ -16,21 +16,16 @@ export default function CreateEmployeePage() {
     const [openConfirm, setOpenConfirm] = useState(false);
     const [openLoadingBackdrop, setOpenLoadingBackdrop] = useState(false);
 
-
-
     const handleSubmit = (values) => {
         setFormValues(values);
         setOpenConfirm(true);
     }
 
     const handleConfirmDialog = () => {
-        console.log(postEmployee);
         setOpenConfirm(false);
         setOpenLoadingBackdrop(true);
         setTimeout(() => {
             const employeeInput = new EmployeeInput(formValues);
-            console.log(employeeInput);
-            //console.log(formValues);
             postEmployee({
                 variables: {
                     data: employeeInput
@@ -76,9 +71,9 @@ export default function CreateEmployeePage() {
             {
                 toastData.show && <CustomToast setToastData={setToastData} mode={toastData.mode} message={toastData.message}></CustomToast>
             }
-            <div className="flex justify-center my-16">
+            <div className="flex justify-center">
                 <div className="w-full max-w-2xl">
-                    <h1 className="flex justify-start text-3xl font-bold text-primary mb-4">New Employee</h1>
+                    {/* <h1 className="flex justify-start text-3xl font-bold text-primary mb-4">New Employee</h1> */}
                     <EmployeeCreateForm resetForm={resetForm} handleSubmit={handleSubmit}></EmployeeCreateForm>
                 </div>
             </div>

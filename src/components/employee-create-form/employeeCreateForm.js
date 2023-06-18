@@ -25,7 +25,7 @@ export const EmployeeCreateForm = ({ resetForm, handleSubmit }) => {
         }),
         onSubmit: values => {
             handleSubmit(values);
-            console.log('form values', values);
+            //console.log('form values', values);
         },
     });
 
@@ -34,7 +34,9 @@ export const EmployeeCreateForm = ({ resetForm, handleSubmit }) => {
     }, [resetForm]);
 
     return (
-        <div className="px-8 py-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="my-3 px-8 pt-4 card-shadow bg-white border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+            <h2 className="inline-block text-3xl font-bold text-primary my-5 gradient-text-reversed">New Employee</h2>
+       
             <form onSubmit={formik.handleSubmit}>
 
                 <div className="mb-6">
@@ -103,7 +105,7 @@ export const EmployeeCreateForm = ({ resetForm, handleSubmit }) => {
                         : null}
 
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-end my-4">
                     <button type="submit" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
                 </div>
             </form>
