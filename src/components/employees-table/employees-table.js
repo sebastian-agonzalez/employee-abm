@@ -88,7 +88,7 @@ const EmployeeTable = () => {
                                 </td>
                                 <td className="px-6 py-6">
                                     <div className="flex justify-center">
-                                        <Link href={`/employees/${id}`}>
+                                        <Link href={`/employee/${id}`}>
                                             <FiArrowRight color='blue' size={20} />
                                         </Link>
                                     </div>
