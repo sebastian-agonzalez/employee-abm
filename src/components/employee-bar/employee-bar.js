@@ -1,8 +1,7 @@
 import { EmployeeDataContext } from "@/context/employeesDataContext";
 import { useContext } from "react";
 import { LoadingSpinner } from "../loading-spinner/spinner";
-import { FiArrowLeftCircle, FiPlusCircle } from 'react-icons/fi';
-import Link from "next/link";
+import { FiArrowLeftCircle, FiPlusCircle, FiXCircle } from 'react-icons/fi';
 import { ROUTES } from "@/variables/routes";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -10,6 +9,26 @@ export const EmployeeBar = () => {
     const router = useRouter();
     const pathName = usePathname();
     const { contextState } = useContext(EmployeeDataContext);
+
+    const buttonBuilder = (path) => {
+        switch (path) {
+            case ROUTES.create:
+                return (<button onClick={() => router.back()} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
+                    <span>Cancel </span>
+                    <span className="ml-2"><FiXCircle size={20} /></span>
+                </button>)
+            case path.includes(ROUTES.viewEmployee) ? path : '':
+                return (<button onClick={() => router.back()} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
+                    <span>Go back </span>
+                    <span className="ml-2"><FiArrowLeftCircle size={20} /></span>
+                </button>)
+            default:
+                return <button onClick={() => router.push(ROUTES.create)} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
+                    <span>Add </span>
+                    <span className="ml-2"><FiPlusCircle size={20} /></span>
+                </button>
+        }
+    }
 
     return (
         <div className="mx-8 pt-4 flex justify-between">
@@ -46,18 +65,7 @@ export const EmployeeBar = () => {
                 </div>
             </div>
             <div className="flex">
-                {
-                    pathName === ROUTES.create ?
-                        <button onClick={() => router.back()} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
-                            <span>Cancel </span>
-                            <span className="ml-2"><FiArrowLeftCircle size={20} /></span>
-                        </button>
-                        :
-                        <button onClick={() => router.push(ROUTES.create)} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
-                            <span>Add </span>
-                            <span className="ml-2"><FiPlusCircle size={20} /></span>
-                        </button>
-                }
+                {buttonBuilder(pathName)}
             </div>
         </div >
     )

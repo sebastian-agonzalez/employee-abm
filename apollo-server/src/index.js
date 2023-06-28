@@ -18,10 +18,10 @@ const EMPLOYEE_DATA_MOCK =
             id: casual.uuid, name: null, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "IT"
         },
         {
-            id: casual.uuid, name: casual.name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "Accounting"
+            id: casual.uuid, name: casual.first_name, lastname: casual.last_name, beginDate: casual.date('YYYY-MM-DD'), endDate: null, registrationStatus: "COMPLETE", area: "Accounting"
         },
         {
-            id: casual.uuid, name: casual.name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: casual.date('YYYY-MM-DD'), registrationStatus: "PENDING", area: null
+            id: casual.uuid, name: casual.first_name, lastname: null, beginDate: casual.date('YYYY-MM-DD'), endDate: casual.date('YYYY-MM-DD'), registrationStatus: "PENDING", area: null
         },
     ]
     ;
@@ -68,7 +68,7 @@ type EmployeesData {
 }
 
 type GetEmployeeData {
-    employee: Employee!
+    employee: Employee
 }
 
 input EmployeeInput {
@@ -125,13 +125,13 @@ const resolvers = {
         employeeData: (parent, args) => {
             const employee = EMPLOYEE_DATA_MOCK.find(e => e.id === args.id);
             return {
-                employee: employee
+                employee: employee ? employee : null
             }
         }
     },
     Mutation: {
         createEmployee: (_, args) => {
-             console.log(args);
+            console.log(args);
             const employee = new Employee(args.data);
             EMPLOYEE_DATA_MOCK.push(employee);
             return employee
