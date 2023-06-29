@@ -22,7 +22,7 @@ export const Header = () => {
                     <div className='flex w-1/5 justify-start'>
                     </div>
                     <div className="w-1/5 flex items-center justify-end md:order-2"> 
-                        <button type="button" className="flex mr-3 text-smrounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                        <button type="button" className="flex mr-3 text-sm first-letter:rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <span className="sr-only">Open user menu</span>
                             <Avatar rounded />
                         </button>

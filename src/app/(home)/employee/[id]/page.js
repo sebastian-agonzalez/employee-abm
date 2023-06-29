@@ -1,21 +1,23 @@
 'use client';
 import EmployeeView from "@/components/employee-view/employeeView";
-import { useEmployee } from "@/services/apollo-service";
+import useEmployeeData from "@/custom-hooks/useEmployeeData";
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
-const EmployeeShow = () => {
+const EmployeeShowPage = () => {
     let employee;
     const params = useParams();
-    const { loading, error, data } = useEmployee(params.id);
-    if (error) console.log(error);
+    const [fetchEmployee, { loading, error, data }] = useEmployeeData(params.id);
+
+    useEffect(() => {
+        fetchEmployee();
+    }, [])
+
     if (data) employee = data.employeeData.employee;
-    console.log('data', data);
 
     return (
-        <>
-            <EmployeeView employee={employee} error={error} loading={loading} />
-        </>
+        <EmployeeView employee={employee} error={error} loading={loading} />
     );
 }
 
-export default EmployeeShow;
+export default EmployeeShowPage;

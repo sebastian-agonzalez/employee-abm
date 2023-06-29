@@ -1,10 +1,10 @@
 'use client';
 import { EmployeeBar } from '@/components/employee-bar/employee-bar';
 import { Header } from '@/components/main-header/header';
-import useEmployeeData from '@/custom-hooks/useEmployeeData';
+import useEmployeeStats from '@/custom-hooks/useEmployeeStats';
 
 export default function HomeLayout({ children }) {
-    useEmployeeData();
+    useEmployeeStats();
     return (
         <>
             <Header></Header>

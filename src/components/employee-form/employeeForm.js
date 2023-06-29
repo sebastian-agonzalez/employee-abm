@@ -1,18 +1,21 @@
+'use client'
 import { EMPLOYEE_AREA } from '@/variables/employee';
 import { DatePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import * as Yup from 'yup';
 
-export const EmployeeCreateForm = ({ resetForm, handleSubmit }) => {
+
+export const EmployeeForm = ({ employeeData, resetForm, handleSubmit }) => {
 
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
-            beginDate: '',
-            endDate: '',
-            area: ''
+            firstName: employeeData?.name ?? '',
+            lastName: employeeData?.lastname ?? '',
+            beginDate: employeeData?.beginDate ? dayjs(employeeData.beginDate) : '',
+            endDate: employeeData?.endDate ? dayjs(employeeData.endDate) : '',
+            area: employeeData?.area ?? ''
         },
         validationSchema: Yup.object({
             firstName: Yup.string()
@@ -35,8 +38,8 @@ export const EmployeeCreateForm = ({ resetForm, handleSubmit }) => {
 
     return (
         <div className="my-3 px-8 pt-4 card-shadow bg-white border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-            <h2 className="inline-block text-3xl font-bold text-primary my-5 gradient-text-reversed">New Employee</h2>
-       
+            <h2 className="inline-block text-3xl font-bold text-primary my-5 gradient-text-reversed">{(employeeData ? 'Edit' : 'New') + ' Employee'}</h2>
+
             <form onSubmit={formik.handleSubmit}>
 
                 <div className="mb-6">
@@ -106,11 +109,11 @@ export const EmployeeCreateForm = ({ resetForm, handleSubmit }) => {
 
                 </div>
                 <div className="flex justify-end my-4">
-                    <button type="submit" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+                    <button type="submit" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirm</button>
                 </div>
             </form>
         </div>
     );
 };
 
-export default EmployeeCreateForm;
+export default EmployeeForm;

@@ -2,7 +2,7 @@
 
 import EmployeeTable from '@/components/employees-table/employees-table';
 
-export default function Home() {
+export default function HomePage() {
     return (
         <div className='py-5'>
             <EmployeeTable></EmployeeTable>

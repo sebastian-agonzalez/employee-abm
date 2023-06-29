@@ -48,12 +48,18 @@ export const GET_EMPLOYEE = gql`
     }`;
 
 //employee hook
-export const useEmployee = (id) => {
-    return useQuery(GET_EMPLOYEE, {
+export const useEmployee = (id, withLazy = false) => {
+    return withLazy ? useLazyQuery(GET_EMPLOYEE, {
+        variables: {
+            id,
+        }
+    }) : useQuery(GET_EMPLOYEE, {
         variables: {
             id,
         }
     });
+
+
 }
 
 //get empleyees without endDate query
@@ -107,7 +113,7 @@ export const POSTPUT_EMPLOYEE = gql`
             }
         }`;
 
-export const useCreateEmployee = () => {
+export const useMutateEmployee = () => {
     return useMutation(POSTPUT_EMPLOYEE);
 }
 

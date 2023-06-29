@@ -1,4 +1,4 @@
-import EmployeesData from '@/services/models/employees-data';
+'use client'
 import { createContext, useState } from 'react';
 
 export const EmployeeDataContext = createContext();
@@ -8,7 +8,7 @@ const EmployeeDataContextProvider = ({ children }) => {
         activeWorkforceCount: null,
         currentWorkforceCount: null,
         pendingRegEmployees: null,
-        employeesData: null,
+        employeeData: null,
     }
 
     const [contextState, setContextState] = useState(employeesData);

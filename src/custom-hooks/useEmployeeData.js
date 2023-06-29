@@ -1,31 +1,32 @@
+import { EmployeeDataContext } from "@/context/employeesDataContext";
+import { useEmployee } from "@/services/apollo-service";
+import { useContext, useEffect, useMemo } from "react";
 
-import { useEffect } from 'react';
-import { useActiveWorkforce, useCurrentWorkforce, usePendingEmployees } from '@/services/apollo-service';
-import { useContext } from 'react';
-import { EmployeeDataContext } from '@/context/employeesDataContext';
-
-const useEmployeeData = () => {
+export const useEmployeeData = (id) => {
     const { contextState, updateContext } = useContext(EmployeeDataContext);
-    const activeWorkForceResult = useActiveWorkforce();
-    const currentWorkforceResult = useCurrentWorkforce();
-    const pendingEmployeesResult = usePendingEmployees()
+    const [fetchEmployee, { loading, error, data }] = useEmployee(id, 'withLazy');
+    // if (data) updateContext({
+    //     ...contextState,
+    //     employeeData: data.employeeData.employee
+    // });
+
+    const memoizedEmployeeData = useMemo(() => {
+        console.log('entra usememo');
+        console.log(data ? data.employeeData.employee : null);
+        return data ? data.employeeData.employee : null;
+    }, [data]);
 
     useEffect(() => {
-        if (currentWorkforceResult.data && activeWorkForceResult.data && pendingEmployeesResult.data) {
+        console.log('entra useeffect');
+        if (memoizedEmployeeData) {
             updateContext({
                 ...contextState,
-                activeWorkforceCount: activeWorkForceResult.data.activeEmployeesCount.resultCount,
-                currentWorkforceCount: currentWorkforceResult.data.currentEmployeesCount.resultCount,
-                pendingEmployeesCount: pendingEmployeesResult.data.pendingEmployeesCount.resultCount,
+                employeeData: memoizedEmployeeData
             });
         }
-    }, [currentWorkforceResult.data, activeWorkForceResult.data, pendingEmployeesResult.data]);
+    }, [memoizedEmployeeData]);
 
-    return {
-        activeWorkForceResult,
-        currentWorkforceResult,
-        pendingEmployeesResult,
-    };
-};
+    return [fetchEmployee, { loading, error, data }]
+}
 
 export default useEmployeeData;
