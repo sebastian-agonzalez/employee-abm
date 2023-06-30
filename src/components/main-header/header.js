@@ -2,10 +2,10 @@ import { EmployeeDataContext } from '@/context/employeesDataContext';
 import Link from 'next/link';
 import { useContext } from 'react';
 import styles from './header.module.css';
-import { LoadingSpinner } from '../loading-spinner/spinner';
+import  LoadingSpinner  from '../loading-spinner/LoadingSpinner';
 import { Avatar } from 'flowbite-react';
 
-export const Header = () => {
+const Header = () => {
     const { contextState } = useContext(EmployeeDataContext);
 
     return (
@@ -72,3 +72,5 @@ export const Header = () => {
             </nav>
         </header >)
 }
+
+export default Header;

@@ -6,7 +6,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function ConfirmDialog({ open, setOpen, handleConfirm }) {
+export const DIALOG_MODE = {
+    create: 'create',
+    edit: 'edit'
+}
+
+const DIALOG_TEXT = {
+    create: {
+        title: "New Register",
+        body: "A new employee register will be created. Please confirm to proceed."
+    },
+    edit: {
+        title: "Edit Register",
+        body: "An employee register will be modified. Please confirm to proceed."
+    }
+}
+
+
+export default function ConfirmDialog({ open, setOpen, handleConfirm, mode }) {
     return (
         <div>
             <Dialog
@@ -15,11 +32,11 @@ export default function ConfirmDialog({ open, setOpen, handleConfirm }) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"New Register"}
+                    {DIALOG_TEXT[mode].title}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        A new employee register will be created. Please confirm to proceed.
+                        {DIALOG_TEXT[mode].body}
                     </DialogContentText>
                 </DialogContent>
                 <div className="p-2">

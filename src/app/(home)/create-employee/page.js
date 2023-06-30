@@ -1,15 +1,14 @@
 'use client';
 
-import LoadingBackdrop from "@/components/backdrop/loadingBackdrop";
-import ConfirmDialog from "@/components/confirm-dialog/confirmDialog";
-import { EmployeeForm } from "@/components/employee-form/employeeForm";
-import CustomToast, { TOAST_MODE } from "@/components/toast/toast";
-import { useMutateEmployee } from "@/services/apollo-service";
+import { LoadingBackdrop, ConfirmDialog, EmployeeForm, CustomToast } from "@/components";
+import { DIALOG_MODE } from "@/components/confirm-dialog/ConfirmDialog";
+import { TOAST_MODE } from "@/components/custom-toast/CustomToast";
+import { useCreateEmployee } from "@/services/apollo-service";
 import EmployeeInput from "@/services/models/employee-input";
 import { useState } from "react";
 
 export default function CreateEmployeePage() {
-    const [postEmployee] = useMutateEmployee();
+    const [postEmployee] = useCreateEmployee();
     const [formValues, setFormValues] = useState({})
     const [resetForm, setResetForm] = useState(false);
     const [toastData, setToastData] = useState({ show: false, message: null, mode: null });
@@ -38,7 +37,7 @@ export default function CreateEmployeePage() {
                         mode: TOAST_MODE.success
                     });
                     setResetForm(true);
-                    console.log(data);
+                    //console.log(data);
                 },
                 onError: (error) => {
                     setOpenLoadingBackdrop(false);
@@ -65,6 +64,7 @@ export default function CreateEmployeePage() {
                     open={openConfirm}
                     setOpen={setOpenConfirm}
                     handleConfirm={handleConfirmDialog}
+                    mode={DIALOG_MODE.create}
                 >
                 </ConfirmDialog >
             }

@@ -1,6 +1,5 @@
 'use client';
-import { EmployeeBar } from '@/components/employee-bar/employee-bar';
-import { Header } from '@/components/main-header/header';
+import { EmployeeBar, Header } from '@/components';
 import useEmployeeStats from '@/custom-hooks/useEmployeeStats';
 
 export default function HomeLayout({ children }) {
@@ -13,7 +12,7 @@ export default function HomeLayout({ children }) {
                     <EmployeeBar></EmployeeBar>
                 </section>
                 <section className='grid-bg flex-1'>
-                    <div className='my-6 py-2'>
+                    <div className='my-6 py-2 h-full w-full'>
                         {children}
                     </div>
                 </section>

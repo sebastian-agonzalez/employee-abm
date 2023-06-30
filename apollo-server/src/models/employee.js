@@ -11,13 +11,14 @@ class Employee {
             }
         }
 
-        this.id = casual.uuid;
+        this.id = employeeData.id || casual.uuid;
         this.name = employeeData.name;
         this.lastname = employeeData.lastname;
         this.beginDate = employeeData.beginDate;
         this.endDate = employeeData.endDate ?? null;
         this.registrationStatus = isPending ? "PENDING" : "COMPLETE"
         this.area = employeeData.area
+        this.profilePic = employeeData.profilePic
     }
 }
 

@@ -43,6 +43,7 @@ export const GET_EMPLOYEE = gql`
                 endDate
                 registrationStatus
                 area
+                profilePic
             }
         }
     }`;
@@ -100,7 +101,7 @@ export const usePendingEmployees = () => {
 }
 
 //new employee mutation
-export const POSTPUT_EMPLOYEE = gql`
+export const POST_EMPLOYEE = gql`
      mutation createEmployee($data: EmployeeInput!) {
         createEmployee(data: $data) {
                 id
@@ -113,7 +114,24 @@ export const POSTPUT_EMPLOYEE = gql`
             }
         }`;
 
-export const useMutateEmployee = () => {
-    return useMutation(POSTPUT_EMPLOYEE);
+export const PUT_EMPLOYEE = gql`
+     mutation editEmployee($data: EmployeeInput!) {
+        editEmployee(data: $data) {
+                id
+                name
+                lastname
+                beginDate
+                endDate
+                registrationStatus
+                area
+            }
+        }`;
+
+export const useCreateEmployee = () => {
+    return useMutation(POST_EMPLOYEE);
+}
+
+export const useEditEmployee = () => {
+    return useMutation(PUT_EMPLOYEE);
 }
 

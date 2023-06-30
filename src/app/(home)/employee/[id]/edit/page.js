@@ -1,9 +1,10 @@
 'use client'
-import EmployeeForm from "@/components/employee-form/employeeForm";
-import { LoadingSpinner } from "@/components/loading-spinner/spinner";
+import { LoadingBackdrop, CardLoadingSpinner, ConfirmDialog, EmployeeForm, CustomToast } from "@/components";
+import { DIALOG_MODE } from "@/components/confirm-dialog/ConfirmDialog";
+import { TOAST_MODE } from "@/components/custom-toast/CustomToast";
 import { EmployeeDataContext } from "@/context/employeesDataContext";
 import useEmployeeData from "@/custom-hooks/useEmployeeData";
-import { useMutateEmployee } from "@/services/apollo-service";
+import { useEditEmployee } from "@/services/apollo-service";
 import EmployeeInput from "@/services/models/employee-input";
 import { ROUTES } from "@/variables/routes";
 import { useParams, useRouter } from "next/navigation";
@@ -15,7 +16,8 @@ const EmployeeEditPage = () => {
     const { contextState } = useContext(EmployeeDataContext);
     const params = useParams();
     const [fetchEmployee, { loading, error, data }] = useEmployeeData(params.id);
-    const [editEmployee] = useMutateEmployee();
+    const [formValues, setFormValues] = useState({})
+    const [editEmployee] = useEditEmployee();
     const [resetForm, setResetForm] = useState(false);
     const [toastData, setToastData] = useState({ show: false, message: null, mode: null });
     const [openConfirm, setOpenConfirm] = useState(false);
@@ -26,12 +28,18 @@ const EmployeeEditPage = () => {
 
     useEffect(() => {
         if (!contextState.employeeData) {
-            console.log('entra fetch');
+            //console.log('entra fetch');
             fetchEmployee();
         }
     }, []);
 
-    const handleSubmit = (formValues) => {
+    const handleSubmit = (values) => {
+        //console.log('handle submit', values);
+        setFormValues(values);
+        setOpenConfirm(true);
+    }
+
+    const handleConfirmDialog = () => {
         setTimeout(() => {
             const employeeInput = new EmployeeInput(formValues);
             editEmployee({
@@ -47,7 +55,7 @@ const EmployeeEditPage = () => {
                     });
                     setResetForm(true);
                     router.push(ROUTES.viewEmployee + employee.id);
-                    console.log(data);
+                    //console.log(data);
                 },
                 onError: (error) => {
                     setOpenLoadingBackdrop(false);
@@ -74,13 +82,16 @@ const EmployeeEditPage = () => {
                     open={openConfirm}
                     setOpen={setOpenConfirm}
                     handleConfirm={handleConfirmDialog}
+                    mode={DIALOG_MODE.edit}
                 >
                 </ConfirmDialog >
             }
             {
                 toastData.show && <CustomToast setToastData={setToastData} mode={toastData.mode} message={toastData.message}></CustomToast>
             }
-            {(loading || employee === undefined) && <LoadingSpinner></LoadingSpinner>}
+            {(loading || employee === undefined) && <div className="flex h-full items-start justify-center w-full">
+                <CardLoadingSpinner />
+            </div>}
             {error &&
                 <div className="flex justify-center items-center">
                     <h2>There's been a problem loading the data.</h2>

@@ -6,7 +6,8 @@ class Employee {
         this.beginDate = employeeData.beginDate
         this.endDate = employeeData.endDate
         this.registrationStatus = employeeData.registrationStatus
-        this.area = employeeData.area
+        this.area = employeeData.area,
+        this.profilePic = employeeData.profilePic
     }
 }
 

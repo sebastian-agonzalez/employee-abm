@@ -1,11 +1,11 @@
 import { EmployeeDataContext } from "@/context/employeesDataContext";
 import { useContext } from "react";
-import { LoadingSpinner } from "../loading-spinner/spinner";
+import  LoadingSpinner  from "../loading-spinner/LoadingSpinner";
 import { FiArrowLeftCircle, FiPlusCircle, FiXCircle } from 'react-icons/fi';
 import { ROUTES } from "@/variables/routes";
 import { usePathname, useRouter } from "next/navigation";
 
-export const EmployeeBar = () => {
+const EmployeeBar = () => {
     const router = useRouter();
     const pathName = usePathname();
     const { contextState } = useContext(EmployeeDataContext);
@@ -70,3 +70,5 @@ export const EmployeeBar = () => {
         </div >
     )
 }
+
+export default EmployeeBar;

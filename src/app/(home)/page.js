@@ -1,11 +1,10 @@
 'use client';
-
-import EmployeeTable from '@/components/employees-table/employees-table';
+import EmployeesTable from '@/components/employees-table/EmployeesTable';
 
 export default function HomePage() {
     return (
-        <div className='py-5'>
-            <EmployeeTable></EmployeeTable>
-        </div>
+            <div className='h-full w-full py-5'>
+                <EmployeesTable></EmployeesTable>
+            </div>
     )
 }

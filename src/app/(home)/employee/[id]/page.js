@@ -1,5 +1,5 @@
 'use client';
-import EmployeeView from "@/components/employee-view/employeeView";
+import EmployeeView from "@/components/employee-view/EmployeeView";
 import useEmployeeData from "@/custom-hooks/useEmployeeData";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
@@ -16,7 +16,9 @@ const EmployeeShowPage = () => {
     if (data) employee = data.employeeData.employee;
 
     return (
-        <EmployeeView employee={employee} error={error} loading={loading} />
+       
+            <EmployeeView employee={employee} error={error} loading={loading} />
+        
     );
 }
 

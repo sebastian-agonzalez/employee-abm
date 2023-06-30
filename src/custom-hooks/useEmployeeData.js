@@ -11,13 +11,13 @@ export const useEmployeeData = (id) => {
     // });
 
     const memoizedEmployeeData = useMemo(() => {
-        console.log('entra usememo');
-        console.log(data ? data.employeeData.employee : null);
+        //console.log('entra usememo');
+        //console.log(data ? data.employeeData.employee : null);
         return data ? data.employeeData.employee : null;
     }, [data]);
 
     useEffect(() => {
-        console.log('entra useeffect');
+        //console.log('entra useeffect');
         if (memoizedEmployeeData) {
             updateContext({
                 ...contextState,
