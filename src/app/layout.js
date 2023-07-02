@@ -7,6 +7,7 @@ import EmployeeDataContextProvider from '@/context/employeesDataContext';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { AnimatePresence } from "framer-motion";
+import ToastNotificationContextProvider, { ToastNotificationContext } from '@/context/ToastNotificationContext';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,15 +20,17 @@ export default function RootLayout({ children }) {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.min.js"></script>
             </head>
             <AnimatePresence>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <ApolloProvider client={ApolloService}>
-                        <EmployeeDataContextProvider>
-                            <body className={`${inter.className} + h-screen`}>
-                                {children}
-                            </body>
-                        </EmployeeDataContextProvider>
-                    </ApolloProvider>
-                </LocalizationProvider>
+                <ToastNotificationContextProvider>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <ApolloProvider client={ApolloService}>
+                            <EmployeeDataContextProvider>
+                                <body className={`${inter.className} + h-screen`}>
+                                    {children}
+                                </body>
+                            </EmployeeDataContextProvider>
+                        </ApolloProvider>
+                    </LocalizationProvider>
+                </ToastNotificationContextProvider>
             </AnimatePresence>
         </html>
     )

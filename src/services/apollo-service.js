@@ -1,7 +1,7 @@
 'use client';
 import { ApolloClient, InMemoryCache, gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
 export const ApolloService = new ApolloClient({
-    uri: 'http://localhost:4000/',
+    uri: 'https://abm-server.onrender.com/',
     cache: new InMemoryCache(),
 });
 

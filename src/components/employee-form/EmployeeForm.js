@@ -11,9 +11,6 @@ const EmployeeForm = ({ employeeData, resetForm, handleSubmit }) => {
     // useEffect(() => {
     //     console.log('employeedata', employeeData);
     // }, [])
-
-
-
     const formik = useFormik({
         initialValues: {
             id: employeeData?.id ? employeeData.id : null,
@@ -28,14 +25,11 @@ const EmployeeForm = ({ employeeData, resetForm, handleSubmit }) => {
                 .max(15, 'Must be 15 characters or less')
                 .required('Required'),
             lastName: Yup.string()
-                .max(15, 'Must be 20 characters or less')
+                .max(30, 'Must be 30 characters or less')
                 .required('Required'),
             area: Yup.string()
         }),
         onSubmit: values => {
-            // console.log('on submit', values);
-            // console.log(dayjs(values.beginDate).format('MM/DD/YYYY'));
-            // console.log(dayjs(values.endDate).format('MM/DD/YYYY'));
             handleSubmit(
                 {
                     ...values,
@@ -43,7 +37,6 @@ const EmployeeForm = ({ employeeData, resetForm, handleSubmit }) => {
                     endDate: values.endDate ? dayjs(values.endDate).format('MM/DD/YYYY') : null
                 }
             );
-            //console.log('form values', values);
         },
     });
 

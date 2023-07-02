@@ -1,8 +1,12 @@
 'use client';
-import { EmployeeBar, Header } from '@/components';
+import { CustomToast, EmployeeBar, Header } from '@/components';
 import useEmployeeStats from '@/custom-hooks/useEmployeeStats';
+import { ToastNotificationContext } from '@/context/ToastNotificationContext';
+import { useContext } from 'react';
 
 export default function HomeLayout({ children }) {
+    const { contextState: toastData, updateContext: setToastData } = useContext(ToastNotificationContext);
+    //console.log(toastData);
     useEmployeeStats();
     return (
         <>
@@ -16,6 +20,9 @@ export default function HomeLayout({ children }) {
                         {children}
                     </div>
                 </section>
+                {
+                    toastData?.show && <CustomToast setToastData={setToastData} mode={toastData.mode} message={toastData.message}></CustomToast>
+                }
             </main>
         </>
     )

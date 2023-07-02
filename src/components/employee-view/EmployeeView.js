@@ -43,11 +43,11 @@ const EmployeeView = ({ employee, loading, error }) => {
                                         <div className="relative w-full mb-6 flex justify-between">
                                             <div className='flex justify-start gap-x-8 items-center'>
                                                 {/* <Image src={employee.profilePic ?? "https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-picture-default-avatar-photo-placeholder-profile-picture-eps-file-easy-to-edit-125707135.jpg"} alt="" className="h-24 w-24 rounded-full bg-gray-50" fill={true}/> */}
-                                                <img src={employee.profilePic ?? "https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-picture-default-avatar-photo-placeholder-profile-picture-eps-file-easy-to-edit-125707135.jpg"} alt="" className="h-24 w-24 rounded-full bg-gray-50"/>
+                                                <img src={employee.profilePic ?? "https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-picture-default-avatar-photo-placeholder-profile-picture-eps-file-easy-to-edit-125707135.jpg"} alt="" className="h-24 w-24 rounded-full bg-gray-50" />
                                                 <div className="text-3xl leading-10">
                                                     <p className="font-semibold text-gray-900">
 
-                                                        {employee.name ? employee.name : '[Pending]'} {employee.lastname ? employee.lastname : <span className='text-gray-400'>{'[Pending]'}</span>}
+                                                        {employee.name ? employee.name : <span className='text-gray-400'>{'[Pending]'}</span>} {employee.lastname ? employee.lastname : <span className='text-gray-400'>{'[Pending]'}</span>}
                                                     </p>
                                                     <p className="text-gray-600 text-xl">{employee.area ? employee.area : <span className='text-gray-400'>{"Area: Pending"}</span>}</p>
                                                 </div>

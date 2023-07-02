@@ -13,7 +13,7 @@ export default function CustomToast({ mode, message, setToastData }) {
 
     setTimeout(() => {
         setToastData({ show: false });
-    }, 4000);
+    }, 6000);
 
     return (
         <div className="flex flex-col gap-4 fixed bottom-3 right-3  z-50">

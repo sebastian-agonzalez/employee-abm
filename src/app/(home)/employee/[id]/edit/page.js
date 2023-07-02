@@ -3,6 +3,7 @@ import { LoadingBackdrop, CardLoadingSpinner, ConfirmDialog, EmployeeForm, Custo
 import { DIALOG_MODE } from "@/components/confirm-dialog/ConfirmDialog";
 import { TOAST_MODE } from "@/components/custom-toast/CustomToast";
 import { EmployeeDataContext } from "@/context/employeesDataContext";
+import { ToastNotificationContext } from "@/context/ToastNotificationContext";
 import useEmployeeData from "@/custom-hooks/useEmployeeData";
 import { useEditEmployee } from "@/services/apollo-service";
 import EmployeeInput from "@/services/models/employee-input";
@@ -13,13 +14,13 @@ import { useContext, useEffect, useState } from "react";
 const EmployeeEditPage = () => {
     let employee;
     const router = useRouter();
-    const { contextState } = useContext(EmployeeDataContext);
     const params = useParams();
+    const { contextState } = useContext(EmployeeDataContext);
+    const { updateContext: setToastData } = useContext(ToastNotificationContext);
     const [fetchEmployee, { loading, error, data }] = useEmployeeData(params.id);
     const [formValues, setFormValues] = useState({})
     const [editEmployee] = useEditEmployee();
     const [resetForm, setResetForm] = useState(false);
-    const [toastData, setToastData] = useState({ show: false, message: null, mode: null });
     const [openConfirm, setOpenConfirm] = useState(false);
     const [openLoadingBackdrop, setOpenLoadingBackdrop] = useState(false);
 
@@ -40,6 +41,8 @@ const EmployeeEditPage = () => {
     }
 
     const handleConfirmDialog = () => {
+        setOpenConfirm(false);
+        setOpenLoadingBackdrop(true);
         setTimeout(() => {
             const employeeInput = new EmployeeInput(formValues);
             editEmployee({
@@ -85,9 +88,6 @@ const EmployeeEditPage = () => {
                     mode={DIALOG_MODE.edit}
                 >
                 </ConfirmDialog >
-            }
-            {
-                toastData.show && <CustomToast setToastData={setToastData} mode={toastData.mode} message={toastData.message}></CustomToast>
             }
             {(loading || employee === undefined) && <div className="flex h-full items-start justify-center w-full">
                 <CardLoadingSpinner />
