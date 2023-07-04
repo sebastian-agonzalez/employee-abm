@@ -5,79 +5,96 @@ import { DIALOG_MODE } from "@/components/confirm-dialog/ConfirmDialog";
 import { TOAST_MODE } from "@/components/custom-toast/CustomToast";
 import { useCreateEmployee } from "@/services/apollo-service";
 import EmployeeInput from "@/services/models/employee-input";
+import { ROUTES } from "@/variables/routes";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CreateEmployeePage() {
+    const router = useRouter();
     const [postEmployee] = useCreateEmployee();
-    const [formValues, setFormValues] = useState({})
-    const [resetForm, setResetForm] = useState(false);
-    const [toastData, setToastData] = useState({ show: false, message: null, mode: null });
-    const [openConfirm, setOpenConfirm] = useState(false);
-    const [openLoadingBackdrop, setOpenLoadingBackdrop] = useState(false);
+    const [state, setState] = useState({
+        formValues: {},
+        resetForm: false,
+        toastData: { show: false, message: null, mode: null },
+        openConfirm: false,
+        openLoadingBackdrop: false,
+    });
 
     const handleSubmit = (values) => {
-        setFormValues(values);
-        setOpenConfirm(true);
-    }
+        setState((prevState) => ({
+            ...prevState,
+            formValues: values,
+            openConfirm: true,
+        }));
+    };
 
     const handleConfirmDialog = () => {
-        setOpenConfirm(false);
-        setOpenLoadingBackdrop(true);
+        setState((prevState) => ({
+            ...prevState,
+            openConfirm: false,
+            openLoadingBackdrop: true,
+        }));
         setTimeout(() => {
-            const employeeInput = new EmployeeInput(formValues);
+            const employeeInput = new EmployeeInput(state.formValues);
             postEmployee({
                 variables: {
-                    data: employeeInput
+                    data: employeeInput,
                 },
                 onCompleted: (data) => {
-                    setOpenLoadingBackdrop(false);
-                    setToastData({
-                        show: true,
-                        message: "Employee register created successfully",
-                        mode: TOAST_MODE.success
-                    });
-                    setResetForm(true);
+                    setState((prevState) => ({
+                        ...prevState,
+                        openLoadingBackdrop: false,
+                        toastData: {
+                            show: true,
+                            message: "Employee register created successfully",
+                            mode: TOAST_MODE.success,
+                        },
+                        resetForm: true,
+                    }));
                     //console.log(data);
+                    router.push(ROUTES.viewEmployee + data.createEmployee.id);
                 },
                 onError: (error) => {
-                    setOpenLoadingBackdrop(false);
-                    setToastData({
-                        show: true,
-                        message: "Employee register could not be created",
-                        mode: TOAST_MODE.error
-                    });
+                    setState((prevState) => ({
+                        ...prevState,
+                        openLoadingBackdrop: false,
+                        toastData: {
+                            show: true,
+                            message: "Employee register could not be created",
+                            mode: TOAST_MODE.error,
+                        },
+                    }));
                     console.error('Error creating user:', error);
                 },
             });
         }, 3000);
-    }
+    };
+
+    const { openLoadingBackdrop, openConfirm, resetForm, toastData } = state;
 
     return (
         <>
             {
-                openLoadingBackdrop
-                && <LoadingBackdrop open={openLoadingBackdrop}></LoadingBackdrop>
+                openLoadingBackdrop && <LoadingBackdrop open={openLoadingBackdrop}></LoadingBackdrop>
             }
             {
-                openConfirm &&
-                <ConfirmDialog
-                    open={openConfirm}
-                    setOpen={setOpenConfirm}
-                    handleConfirm={handleConfirmDialog}
-                    mode={DIALOG_MODE.create}
-                >
-                </ConfirmDialog >
+                openConfirm && (
+                    <ConfirmDialog
+                        open={openConfirm}
+                        setOpen={(value) => setState((prevState) => ({ ...prevState, openConfirm: value }))}
+                        handleConfirm={handleConfirmDialog}
+                        mode={DIALOG_MODE.create}
+                    />
+                )
             }
             {
-                toastData.show && <CustomToast setToastData={setToastData} mode={toastData.mode} message={toastData.message}></CustomToast>
+                toastData.show && <CustomToast setToastData={(data) => setState((prevState) => ({ ...prevState, toastData: data }))} mode={toastData.mode} message={toastData.message}></CustomToast>
             }
             <div className="flex justify-center">
                 <div className="w-full max-w-2xl">
-                    {/* <h1 className="flex justify-start text-3xl font-bold text-primary mb-4">New Employee</h1> */}
                     <EmployeeForm resetForm={resetForm} handleSubmit={handleSubmit}></EmployeeForm>
                 </div>
             </div>
         </>
-
-    )
+    );
 }

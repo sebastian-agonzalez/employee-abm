@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <ApolloProvider client={ApolloService}>
                             <EmployeeDataContextProvider>
-                                <body className={`${inter.className} + h-screen`}>
+                                <body className={`${inter.className} h-screen`}>
                                     {children}
                                 </body>
                             </EmployeeDataContextProvider>

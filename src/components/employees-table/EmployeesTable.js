@@ -18,6 +18,7 @@ const applyStatusColor = (code) => {
 }
 
 const EmployeesTable = () => {
+    console.log('employeeTable');
     let employees;
     let { loading, error, data } = useEmployees();
 
@@ -28,7 +29,10 @@ const EmployeesTable = () => {
     </div>)
 
 
-    if (error) return <p>Error : {error.message}</p>;
+    if (error) return (
+        <div className="flex justify-center items-center">
+            <h2>There's been an error loading the data.</h2>
+        </div>);
     if (data) {
         employees = new EmployeesData(data.employeesData.data.employees).getData();
     }

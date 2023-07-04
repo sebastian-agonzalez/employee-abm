@@ -16,9 +16,7 @@ const EmployeeShowPage = () => {
     if (data) employee = data.employeeData.employee;
 
     return (
-       
             <EmployeeView employee={employee} error={error} loading={loading} />
-        
     );
 }
 
