@@ -1,14 +1,26 @@
-import { EmployeeDataContext } from "@/context/employeesDataContext";
-import { useContext } from "react";
-import  LoadingSpinner  from "../loading-spinner/LoadingSpinner";
-import { FiArrowLeftCircle, FiPlusCircle, FiXCircle } from 'react-icons/fi';
+import LoadingSpinner from "../loading-spinner/LoadingSpinner";
+import { FiArrowLeftCircle, FiPlusCircle, FiRefreshCw, FiXCircle } from 'react-icons/fi';
 import { ROUTES } from "@/variables/routes";
 import { usePathname, useRouter } from "next/navigation";
+import useAppStore from "@/state/store";
 
 const EmployeeBar = () => {
     const router = useRouter();
     const pathName = usePathname();
-    const { contextState } = useContext(EmployeeDataContext);
+
+    const setEmployeesData = useAppStore((state) => (state.setEmployeesData));
+    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
+    const activeCount = useAppStore((state) => (state.activeCount));
+    const setActiveCount = useAppStore((state) => (state.setActiveCount));
+    const pendingCount = useAppStore((state) => (state.pendingCount));
+    const setPendingCount = useAppStore((state) => (state.setPendingCount));
+
+    const refetchData = () => {
+        setEmployeesData(null);
+        setCurrentCount(null);
+        setActiveCount(null);
+        setPendingCount(null);
+    }
 
     const buttonBuilder = (path) => {
         switch (path) {
@@ -38,8 +50,8 @@ const EmployeeBar = () => {
                         <span className="relative flex justify-center items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                             Active Workforce:
                             <span className="flex justify-center items-center w-4 h-4 ml-1">
-                                {contextState?.activeWorkforceCount ?
-                                    <p>{contextState.activeWorkforceCount}</p>
+                                {activeCount ?
+                                    <p>{activeCount}</p>
                                     : <LoadingSpinner size={4} />}
                                 {/* {null ?
                                     <p>{contextState.currentWorkforceCount}</p>
@@ -53,14 +65,20 @@ const EmployeeBar = () => {
                         <span className=" flex justify-center items-center px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                             Pending Registration:
                             <span className="flex justify-center items-center w-4 h-4 ml-1">
-                                {contextState?.pendingEmployeesCount ?
-                                    <p>{contextState.pendingEmployeesCount}</p>
+                                {pendingCount ?
+                                    <p>{pendingCount}</p>
                                     : <LoadingSpinner size={4} />}
                                 {/* {null ?
                                     <p>{contextState.pendingEmployeesCount}</p>
                                     : <div className="mx-1"><LoadingSpinner size={4} /></div>} */}
                             </span>
                         </span>
+                    </button>
+                </div>
+                <div>
+                    <button onClick={refetchData} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-3 text-center mb-2">
+                        <span>Refresh </span>
+                        <span className="ml-2"><FiRefreshCw size={20} /></span>
                     </button>
                 </div>
             </div>

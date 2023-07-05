@@ -1,12 +1,11 @@
-import { EmployeeDataContext } from '@/context/employeesDataContext';
 import Link from 'next/link';
-import { useContext } from 'react';
 import styles from './header.module.css';
-import  LoadingSpinner  from '../loading-spinner/LoadingSpinner';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import { Avatar } from 'flowbite-react';
+import useAppStore from '@/state/store';
 
 const Header = () => {
-    const { contextState } = useContext(EmployeeDataContext);
+    const currentCount = useAppStore((state) => (state.currentCount));
 
     return (
         <header className={`${styles['header-main']} pt-3 px-4 bg-transparent rounded-b rounded-lg`}>
@@ -21,8 +20,8 @@ const Header = () => {
                     </div>
                     <div className='flex w-1/5 justify-start'>
                     </div>
-                    <div className="w-1/5 flex items-center justify-end md:order-2"> 
-                        <button type="button" className="flex mr-3 text-sm first-letter:rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                    <div className="w-1/5 flex items-center justify-end md:order-2">
+                        <button type="button" className="flex mr-3 text-sm first-letter:rounded-full rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <span className="sr-only">Open user menu</span>
                             <Avatar rounded />
                         </button>
@@ -59,8 +58,8 @@ const Header = () => {
                                     <span className="mr-2 py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">
                                         Actual Workforce:</span>
                                     <div className='w-4 h-4 flex items-center'>
-                                        {contextState.currentWorkforceCount ?
-                                            <p>{contextState.currentWorkforceCount}</p>
+                                        {currentCount ?
+                                            <p>{currentCount}</p>
                                             : <LoadingSpinner size={4} />}
                                     </div>
 

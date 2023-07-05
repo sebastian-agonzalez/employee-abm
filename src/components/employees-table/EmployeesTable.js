@@ -17,23 +17,12 @@ const applyStatusColor = (code) => {
     }
 }
 
-const EmployeesTable = () => {
-    console.log('employeeTable');
+const EmployeesTable = ({ data }) => {
+    //console.log('employeeTable');
     let employees;
-    let { loading, error, data } = useEmployees();
-
     //loading = true;
-
-    if (loading) return (<div className="flex h-full items-start justify-center w-full">
-        <CardLoadingSpinner />
-    </div>)
-
-
-    if (error) return (
-        <div className="flex justify-center items-center">
-            <h2>There's been an error loading the data.</h2>
-        </div>);
     if (data) {
+        // console.log('table',data);
         employees = new EmployeesData(data.employeesData.data.employees).getData();
     }
 

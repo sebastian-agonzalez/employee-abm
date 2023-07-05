@@ -8,11 +8,17 @@ import { ToastNotificationContext } from "@/context/ToastNotificationContext";
 import useEmployeeData from "@/custom-hooks/useEmployeeData";
 import { useEditEmployee } from "@/services/apollo-service";
 import EmployeeInput from "@/services/models/employee-input";
+import useAppStore from "@/state/store";
 import { ROUTES } from "@/variables/routes";
 import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 const EmployeeEditPage = () => {
+    const setEmployeesData = useAppStore((state) => (state.setEmployeesData));
+    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
+    const setActiveCount = useAppStore((state) => (state.setActiveCount));
+    const setPendingCount = useAppStore((state) => (state.setPendingCount));
+
     const router = useRouter();
     const params = useParams();
     const { contextState } = useContext(EmployeeDataContext);
@@ -47,6 +53,13 @@ const EmployeeEditPage = () => {
         }
     }, [data]);
 
+    const refetchData = () => {
+        setEmployeesData(null);
+        setCurrentCount(null);
+        setActiveCount(null);
+        setPendingCount(null);
+    }
+
     const handleSubmit = (values) => {
         setState((prevState) => ({
             ...prevState,
@@ -73,19 +86,17 @@ const EmployeeEditPage = () => {
                         ...prevState,
                         openLoadingBackdrop: false,
                     }));
-
                     setToastData({
                         show: true,
                         message: "Employee register modified successfully",
                         mode: TOAST_MODE.success,
                     });
-
                     setState((prevState) => ({
                         ...prevState,
                         resetForm: true,
                     }));
-                    console.log(data);
-
+                    refetchData();
+                    //console.log(data);
                     router.push(ROUTES.viewEmployee + state.employee.id);
                 },
                 onError: (error) => {
@@ -93,13 +104,11 @@ const EmployeeEditPage = () => {
                         ...prevState,
                         openLoadingBackdrop: false,
                     }));
-
                     setToastData({
                         show: true,
                         message: "Employee register could not be modified",
                         mode: TOAST_MODE.error,
                     });
-
                     console.error("Error creating user:", error);
                 },
             });

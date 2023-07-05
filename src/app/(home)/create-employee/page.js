@@ -5,11 +5,17 @@ import { DIALOG_MODE } from "@/components/confirm-dialog/ConfirmDialog";
 import { TOAST_MODE } from "@/components/custom-toast/CustomToast";
 import { useCreateEmployee } from "@/services/apollo-service";
 import EmployeeInput from "@/services/models/employee-input";
+import useAppStore from "@/state/store";
 import { ROUTES } from "@/variables/routes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CreateEmployeePage() {
+    const setEmployeesData = useAppStore((state) => (state.setEmployeesData));
+    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
+    const setActiveCount = useAppStore((state) => (state.setActiveCount));
+    const setPendingCount = useAppStore((state) => (state.setPendingCount));
+
     const router = useRouter();
     const [postEmployee] = useCreateEmployee();
     const [state, setState] = useState({
@@ -19,6 +25,13 @@ export default function CreateEmployeePage() {
         openConfirm: false,
         openLoadingBackdrop: false,
     });
+
+    const refetchData = () => {
+        setEmployeesData(null);
+        setCurrentCount(null);
+        setActiveCount(null);
+        setPendingCount(null);
+    }
 
     const handleSubmit = (values) => {
         setState((prevState) => ({
@@ -51,6 +64,7 @@ export default function CreateEmployeePage() {
                         },
                         resetForm: true,
                     }));
+                    refetchData();
                     //console.log(data);
                     router.push(ROUTES.viewEmployee + data.createEmployee.id);
                 },

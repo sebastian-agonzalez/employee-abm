@@ -1,13 +1,49 @@
 'use client';
 import { CustomToast, EmployeeBar, Header } from '@/components';
-import useEmployeeStats from '@/custom-hooks/useEmployeeStats';
 import { ToastNotificationContext } from '@/context/ToastNotificationContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import useAppStore from '@/state/store';
+import { fetchActiveEmployeesCount, fetchCurrentEmployeesCount, fetchPendingEmployeesCount } from '@/services/apollo-service';
 
 export default function HomeLayout({ children }) {
+    const currentCount = useAppStore((state) => (state.currentCount));
+    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
+    const activeCount = useAppStore((state) => (state.activeCount));
+    const setActiveCount = useAppStore((state) => (state.setActiveCount));
+    const pendingCount = useAppStore((state) => (state.pendingCount));
+    const setPendingCount = useAppStore((state) => (state.setPendingCount));
     const { contextState: toastData, updateContext: setToastData } = useContext(ToastNotificationContext);
-    //console.log(toastData);
-    useEmployeeStats();
+
+    useEffect(() => {
+        if (!currentCount) {
+            (async () => {
+                const response = await fetchCurrentEmployeesCount();
+                console.log('current', response);
+                setCurrentCount(response.data.currentEmployeesCount.resultCount)
+            })();
+        }
+    }, [currentCount]);
+
+    useEffect(() => {
+        if (!activeCount) {
+            (async () => {
+                const response = await fetchActiveEmployeesCount();
+                console.log('active', response);
+                setActiveCount(response.data.activeEmployeesCount.resultCount)
+            })();
+        }
+    }, [activeCount]);
+
+    useEffect(() => {
+        if (!pendingCount) {
+            (async () => {
+                const response = await fetchPendingEmployeesCount();
+                console.log('pending', response);
+                setPendingCount(response.data.pendingEmployeesCount.resultCount)
+            })();
+        }
+    }, [pendingCount]);
+
     return (
         <>
             <Header></Header>
