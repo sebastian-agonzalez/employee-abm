@@ -1,27 +1,19 @@
 'use client';
 import { CardLoadingSpinner } from '@/components';
 import EmployeesTable from '@/components/employees-table/EmployeesTable';
-import { fetchEmployeeData } from '@/services/apollo-service';
 import useAppStore from '@/state/store';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function HomePage() {
     const setEmployeesData = useAppStore((state) => (state.setEmployeesData));
     const employeesData = useAppStore((state) => (state.employeesData));
-    const [loading, setLoading] = useState(false);
+    const loadingEmployees = useAppStore((state) => (state.loadingEmployees));
 
     useEffect(() => {
-        if (!employeesData) {
-            setLoading(true);
-            (async () => {
-                const response = await fetchEmployeeData();
-                setEmployeesData(response.data);
-                setLoading(false);
-            })();
-        }
-    }, [employeesData]);
+        setEmployeesData();
+    }, []);
 
-    if (loading) return (<div className="flex h-full items-start justify-center w-full">
+    if (loadingEmployees || employeesData === undefined) return (<div className="flex h-full items-start justify-center w-full">
         <CardLoadingSpinner />
     </div>);
 
