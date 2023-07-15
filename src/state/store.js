@@ -1,4 +1,4 @@
-import { fetchEmployeeData } from '@/services/apollo-service';
+import { fetchActiveEmployeesCount, fetchCurrentEmployeesCount, fetchEmployeeData, fetchPendingEmployeesCount } from '@/services/apollo-service';
 import { create } from 'zustand';
 
 const useAppStore = create((set) => ({
@@ -8,17 +8,23 @@ const useAppStore = create((set) => ({
     currentCount: undefined,
     activeCount: null,
     pendingCount: null,
-    // setEmployeesData: (data) => set({ employeesData: data }),
     setEmployeesData: async () => {
-        set({ loadingEmployees: true });
         const response = await fetchEmployeeData();
-        set({ employeesData: response.data })
-        set({ loadingEmployees: false });
+        set({ employeesData: response.data });
     },
     setEmployeeData: (data) => set({ employeeData: data }),
-    setCurrentCount: (data) => set({ currentCount: data }),
-    setActiveCount: (data) => set({ activeCount: data }),
-    setPendingCount: (data) => set({ pendingCount: data }),
+    setCurrentCount: async () => {
+        const response = await fetchCurrentEmployeesCount();
+        set({ currentCount: response.data.currentEmployeesCount.resultCount });
+    },
+    setActiveCount: async () => {
+        const response = await fetchActiveEmployeesCount();
+        set({ activeCount: response.data.activeEmployeesCount.resultCount });
+    },
+    setPendingCount: async () => {
+        const response = await fetchPendingEmployeesCount();
+        set({ pendingCount: response.data.pendingEmployeesCount.resultCount });
+    },
     resetStatsCount: () => {
         set({ employeesData: undefined })
         set({ currentCount: null });

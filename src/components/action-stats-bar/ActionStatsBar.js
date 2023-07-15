@@ -4,23 +4,12 @@ import { ROUTES } from "@/variables/routes";
 import { usePathname, useRouter } from "next/navigation";
 import useAppStore from "@/state/store";
 
-const EmployeeBar = () => {
+const ActionStatsBar = () => {
     const router = useRouter();
     const pathName = usePathname();
-
-    const setEmployeesData = useAppStore((state) => (state.setEmployeesData));
-    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
     const activeCount = useAppStore((state) => (state.activeCount));
-    const setActiveCount = useAppStore((state) => (state.setActiveCount));
     const pendingCount = useAppStore((state) => (state.pendingCount));
-    const setPendingCount = useAppStore((state) => (state.setPendingCount));
-
-    const refetchData = () => {
-        setEmployeesData(null);
-        setCurrentCount(null);
-        setActiveCount(null);
-        setPendingCount(null);
-    }
+    const resetStatsCount = useAppStore((state) => (state.resetStatsCount));
 
     const buttonBuilder = (path) => {
         switch (path) {
@@ -76,7 +65,7 @@ const EmployeeBar = () => {
                     </button>
                 </div>
                 <div>
-                    <button onClick={refetchData} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-3 text-center mb-2">
+                    <button onClick={resetStatsCount} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-3 text-center mb-2">
                         <span>Refresh </span>
                         <span className="ml-2"><FiRefreshCw size={20} /></span>
                     </button>
@@ -89,4 +78,4 @@ const EmployeeBar = () => {
     )
 }
 
-export default EmployeeBar;
+export default ActionStatsBar;

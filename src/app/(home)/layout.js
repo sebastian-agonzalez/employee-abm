@@ -1,5 +1,5 @@
 'use client';
-import { CustomToast, EmployeeBar, Header } from '@/components';
+import { CustomToast, ActionStatsBar, Header } from '@/components';
 import { ToastNotificationContext } from '@/context/ToastNotificationContext';
 import { useContext, useEffect } from 'react';
 import useAppStore from '@/state/store';
@@ -16,31 +16,19 @@ export default function HomeLayout({ children }) {
 
     useEffect(() => {
         if (!currentCount) {
-            (async () => {
-                const response = await fetchCurrentEmployeesCount();
-                //console.log('current', response);
-                setCurrentCount(response.data.currentEmployeesCount.resultCount)
-            })();
+            setCurrentCount();
         }
     }, [currentCount]);
 
     useEffect(() => {
         if (!activeCount) {
-            (async () => {
-                const response = await fetchActiveEmployeesCount();
-                //console.log('active', response);
-                setActiveCount(response.data.activeEmployeesCount.resultCount)
-            })();
+            setActiveCount();
         }
     }, [activeCount]);
 
     useEffect(() => {
         if (!pendingCount) {
-            (async () => {
-                const response = await fetchPendingEmployeesCount();
-                //console.log('pending', response);
-                setPendingCount(response.data.pendingEmployeesCount.resultCount)
-            })();
+            setPendingCount();
         }
     }, [pendingCount]);
 
@@ -49,7 +37,7 @@ export default function HomeLayout({ children }) {
             <Header></Header>
             <main className='h-full my-1 bg-gradient-to-r from-pink-200 to-blue-200 flex flex-col' >
                 <section className='bg-white'>
-                    <EmployeeBar></EmployeeBar>
+                    <ActionStatsBar></ActionStatsBar>
                 </section>
                 <section className='grid-bg flex-1'>
                     <div className='my-6 py-2 h-full w-full'>

@@ -10,8 +10,9 @@ export default function HomePage() {
     const loadingEmployees = useAppStore((state) => (state.loadingEmployees));
 
     useEffect(() => {
-        setEmployeesData();
-    }, []);
+        if (!employeesData)
+            setEmployeesData();
+    }, [employeesData]);
 
     if (loadingEmployees || employeesData === undefined) return (<div className="flex h-full items-start justify-center w-full">
         <CardLoadingSpinner />
