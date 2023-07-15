@@ -18,7 +18,13 @@ const useAppStore = create((set) => ({
     setEmployeeData: (data) => set({ employeeData: data }),
     setCurrentCount: (data) => set({ currentCount: data }),
     setActiveCount: (data) => set({ activeCount: data }),
-    setPendingCount: (data) => set({ pendingCount: data })
+    setPendingCount: (data) => set({ pendingCount: data }),
+    resetStatsCount: () => {
+        set({ employeesData: undefined })
+        set({ currentCount: null });
+        set({ activeCount: null });
+        set({ pendingCount: null });
+    }
 }));
 
 export default useAppStore

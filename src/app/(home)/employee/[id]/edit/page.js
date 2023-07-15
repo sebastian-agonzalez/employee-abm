@@ -18,6 +18,7 @@ const EmployeeEditPage = () => {
     const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
     const setActiveCount = useAppStore((state) => (state.setActiveCount));
     const setPendingCount = useAppStore((state) => (state.setPendingCount));
+    const resetStatsCount = useAppStore((state) => (state.resetStatsCount))
 
     const router = useRouter();
     const params = useParams();
@@ -52,13 +53,6 @@ const EmployeeEditPage = () => {
             }));
         }
     }, [data]);
-
-    const refetchData = () => {
-        setEmployeesData(null);
-        setCurrentCount(null);
-        setActiveCount(null);
-        setPendingCount(null);
-    }
 
     const handleSubmit = (values) => {
         setState((prevState) => ({
@@ -95,7 +89,7 @@ const EmployeeEditPage = () => {
                         ...prevState,
                         resetForm: true,
                     }));
-                    refetchData();
+                    resetStatsCount();
                     //console.log(data);
                     router.push(ROUTES.viewEmployee + state.employee.id);
                 },

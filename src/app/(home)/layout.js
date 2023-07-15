@@ -18,7 +18,7 @@ export default function HomeLayout({ children }) {
         if (!currentCount) {
             (async () => {
                 const response = await fetchCurrentEmployeesCount();
-                console.log('current', response);
+                //console.log('current', response);
                 setCurrentCount(response.data.currentEmployeesCount.resultCount)
             })();
         }
@@ -28,7 +28,7 @@ export default function HomeLayout({ children }) {
         if (!activeCount) {
             (async () => {
                 const response = await fetchActiveEmployeesCount();
-                console.log('active', response);
+                //console.log('active', response);
                 setActiveCount(response.data.activeEmployeesCount.resultCount)
             })();
         }
@@ -38,7 +38,7 @@ export default function HomeLayout({ children }) {
         if (!pendingCount) {
             (async () => {
                 const response = await fetchPendingEmployeesCount();
-                console.log('pending', response);
+                //console.log('pending', response);
                 setPendingCount(response.data.pendingEmployeesCount.resultCount)
             })();
         }
