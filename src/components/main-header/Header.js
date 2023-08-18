@@ -13,7 +13,7 @@ const Header = () => {
                 <div className="flex items-center justify-between mx-auto p-4">
                     <div className='flex w-1/5 justify-start'>
                         <Link href="/" className="flex items-center">
-                            <p className={`text-3xl font-bold gradient-text`} >EmployeeTracker</p>
+                            <p translate='no' className={`text-3xl font-extrabold gradient-text`} >StaffTracker</p>
                         </Link>
                     </div>
                     <div className='flex w-1/5 justify-start'>
@@ -56,7 +56,7 @@ const Header = () => {
                             <li>
                                 <div className="flex items-center">
                                     <span className="mr-2 py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">
-                                        Actual Workforce:</span>
+                                        Current Workforce:</span>
                                     <div className='w-4 h-4 flex items-center'>
                                         {currentCount ?
                                             <p>{currentCount}</p>
