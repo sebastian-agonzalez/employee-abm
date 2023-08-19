@@ -14,16 +14,6 @@ export default function HomeLayout({ children }) {
     const pendingCount = useAppStore((state) => (state.pendingCount));
     const setPendingCount = useAppStore((state) => (state.setPendingCount));
     const { contextState: toastData, updateContext: setToastData } = useContext(ToastNotificationContext);
-    const [showRotate, setShowRotate] = useState(false);
-
-    useEffect(() => {
-        const handleScreenSize = () => {
-            setShowRotate(window.innerWidth < window.innerHeight);
-        }
-        handleScreenSize();
-        window.addEventListener('resize', handleScreenSize);
-    }, [])
-
 
     useEffect(() => {
         if (!currentCount) {
@@ -43,7 +33,6 @@ export default function HomeLayout({ children }) {
         }
     }, [pendingCount]);
 
-    console.log(showRotate);
     return (
         <>
             <div id="portrait-placeholder" className={'flex justify-center items-center w-full h-screen'}>
