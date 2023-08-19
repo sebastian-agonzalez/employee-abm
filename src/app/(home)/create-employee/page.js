@@ -11,13 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CreateEmployeePage() {
-    const setEmployeesData = useAppStore((state) => (state.setEmployeesData));
-    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
-    const setActiveCount = useAppStore((state) => (state.setActiveCount));
-    const setPendingCount = useAppStore((state) => (state.setPendingCount));
-
     const router = useRouter();
-    const [postEmployee] = useCreateEmployee();
     const [state, setState] = useState({
         formValues: {},
         resetForm: false,
@@ -25,13 +19,8 @@ export default function CreateEmployeePage() {
         openConfirm: false,
         openLoadingBackdrop: false,
     });
-
-    const refetchData = () => {
-        setEmployeesData(null);
-        setCurrentCount(null);
-        setActiveCount(null);
-        setPendingCount(null);
-    }
+    const resetStatsCount = useAppStore((state) => (state.resetStatsCount));
+    const [postEmployee] = useCreateEmployee();
 
     const handleSubmit = (values) => {
         setState((prevState) => ({
@@ -64,8 +53,7 @@ export default function CreateEmployeePage() {
                         },
                         resetForm: true,
                     }));
-                    refetchData();
-                    //console.log(data);
+                    resetStatsCount();
                     router.push(ROUTES.viewEmployee + data.createEmployee.id);
                 },
                 onError: (error) => {

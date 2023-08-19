@@ -6,14 +6,14 @@ import { useContext, useEffect } from 'react';
 import { AiOutlineRotateLeft } from 'react-icons/ai';
 
 export default function HomeLayout({ children }) {
-    const [
+    const {
         currentCount,
         setCurrentCount,
         activeCount,
         setActiveCount,
         pendingCount,
         setPendingCount,
-    ] = useStatsState();
+    } = useStatsState();
     const { contextState: toastData, updateContext: setToastData } = useContext(ToastNotificationContext);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ export default function HomeLayout({ children }) {
                     <section className='bg-white'>
                         <ActionStatsBar></ActionStatsBar>
                     </section>
-                    <section className='grid-bg'>
+                    <section className='grid-bg h-screen'>
                         <div className='my-6 py-2 h-full w-full'>
                             {children}
                         </div>

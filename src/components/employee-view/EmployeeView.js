@@ -6,11 +6,8 @@ import { HiExclamation } from 'react-icons/hi';
 import HorizontalRouteAnimator from '../animator/HorizontalRouteAnimator';
 
 const EmployeeView = ({ employee }) => {
-    //console.log('employee view', employee);
-    const dateSectionClasses = "relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100";
-    // useEffect(() => {
-    //     console.log('employee view', employee);
-    // }, [])
+    const dateSectionClasses = "relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600";
+
     return (
         <div className="flex justify-center">
             <div className="w-full max-w-2xl">
@@ -46,6 +43,7 @@ const EmployeeView = ({ employee }) => {
                                     employee.beginDate ? <time className={dateSectionClasses} datetime={employee.beginDate}>{employee.beginDate}</time>
                                         : <p className={dateSectionClasses}>Pending</p>
                                 }
+                                <span className='mx-4'>|</span>
                                 <span>End Date: </span>
                                 {
                                     employee.endDate ? <time className={dateSectionClasses} datetime={employee.endDate}>{employee.endDate}</time>
@@ -55,7 +53,7 @@ const EmployeeView = ({ employee }) => {
                             <div className="group relative my-3">
                                 <p className="mt-3 font-medium leading-6 text-gray-900 group-hover:text-gray-600">
                                     <span className="absolute inset-0"></span>
-                                    Employee ID: {employee.id}
+                                    Employee ID: <span className='mx-2'>{employee.id}</span>
                                 </p>
                             </div>
                             {employee.registrationStatus === REGISTRATION_STATUS.pending && <>

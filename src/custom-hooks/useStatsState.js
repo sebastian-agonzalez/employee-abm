@@ -7,8 +7,17 @@ const useStatsState = () => {
     const setActiveCount = useAppStore((state) => (state.setActiveCount));
     const pendingCount = useAppStore((state) => (state.pendingCount));
     const setPendingCount = useAppStore((state) => (state.setPendingCount));
+    const resetStatsCount = useAppStore((state) => (state.resetStatsCount));
 
-    return [currentCount, setCurrentCount, activeCount, setActiveCount, pendingCount, setPendingCount];
+    return {
+        currentCount,
+        setCurrentCount,
+        activeCount,
+        setActiveCount,
+        pendingCount,
+        setPendingCount,
+        resetStatsCount
+    };
 }
 
 export default useStatsState;

@@ -1,28 +1,17 @@
 'use client';
-import { useEmployees } from '@/services/apollo-service';
 import EmployeesData from '@/services/models/employees-data';
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
 import HorizontalRouteAnimator from '../animator/HorizontalRouteAnimator';
-import CardLoadingSpinner from '../card-loading-spinner/CardLoadingSpinner';
 
-const applyStatusColor = (code) => {
-    switch (code) {
-        case "PENDING":
-            return 'warning';
-        case "COMPLETED":
-            return 'success';
-        default:
-            break;
-    }
+const STATUS_COLOR = {
+    "PENDING": "warning",
+    "COMPLETE": "success"
 }
 
 const EmployeesTable = ({ data }) => {
-    //console.log('employeeTable');
     let employees;
-    //loading = true;
     if (data) {
-        // console.log('table',data);
         employees = new EmployeesData(data.employeesData.data.employees).getData();
     }
 
@@ -62,9 +51,14 @@ const EmployeesTable = ({ data }) => {
                     <tbody>
                         {
                             employees.map(({ id, name, lastname, beginDate, endDate, registrationStatus, area }, i) => (
-                                <tr key={i} className={i === (employees.length - 1) ? "bg-white dark:bg-gray-800" : "bg-white border-b dark:bg-gray-800 dark:border-gray-700"}>
-                                    <td className={"px-6 py-4 text-" + applyStatusColor(registrationStatus)}>
-                                        <p>{registrationStatus}</p>
+                                <tr key={i + id} className={i === (employees.length - 1) ? "bg-white dark:bg-gray-800" : "bg-white border-b dark:bg-gray-800 dark:border-gray-700"}>
+                                    <td className={"px-6"} style={{ width: '15rem'}}>
+                                        <span>
+                                            {registrationStatus}
+                                            <div className={'mx-3 rounded-full inline-block p-1 bg-' + (STATUS_COLOR[registrationStatus ?? ""])}>
+                                            </div>
+                                        </span>
+
                                     </td>
                                     <td className="px-6 py-4 overflow-hidden" style={{ width: '40px' }}>
                                         <p data-tooltip-target="tooltip-animation" className='line-clamp-2'>{id}</p>
@@ -92,7 +86,6 @@ const EmployeesTable = ({ data }) => {
                                         </div>
                                     </td>
                                 </tr >
-
                             ))
                         }
                     </tbody>
@@ -100,7 +93,6 @@ const EmployeesTable = ({ data }) => {
             </div>
         </HorizontalRouteAnimator>
     )
-
 }
 
 export default EmployeesTable;

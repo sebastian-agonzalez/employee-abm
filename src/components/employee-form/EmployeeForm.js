@@ -8,9 +8,6 @@ import * as Yup from 'yup';
 import HorizontalRouteAnimator from '../animator/HorizontalRouteAnimator';
 
 const EmployeeForm = ({ employeeData, resetForm, handleSubmit }) => {
-    // useEffect(() => {
-    //     console.log('employeedata', employeeData);
-    // }, [])
     const formik = useFormik({
         initialValues: {
             id: employeeData?.id ? employeeData.id : null,

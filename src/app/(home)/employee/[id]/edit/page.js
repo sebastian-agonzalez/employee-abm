@@ -14,16 +14,11 @@ import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 const EmployeeEditPage = () => {
-    const setEmployeesData = useAppStore((state) => (state.setEmployeesData));
-    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
-    const setActiveCount = useAppStore((state) => (state.setActiveCount));
-    const setPendingCount = useAppStore((state) => (state.setPendingCount));
-    const resetStatsCount = useAppStore((state) => (state.resetStatsCount))
-
     const router = useRouter();
     const params = useParams();
-    const { contextState } = useContext(EmployeeDataContext);
     const { updateContext: setToastData } = useContext(ToastNotificationContext);
+    const resetStatsCount = useAppStore((state) => (state.resetStatsCount));
+    const { contextState } = useContext(EmployeeDataContext);
     const [fetchEmployee, { loading, error, data }] = useEmployeeData(params.id);
     const [state, setState] = useState({
         employee: undefined,
@@ -75,7 +70,7 @@ const EmployeeEditPage = () => {
                 variables: {
                     data: employeeInput,
                 },
-                onCompleted: (data) => {
+                onCompleted: () => {
                     setState((prevState) => ({
                         ...prevState,
                         openLoadingBackdrop: false,
@@ -90,7 +85,6 @@ const EmployeeEditPage = () => {
                         resetForm: true,
                     }));
                     resetStatsCount();
-                    //console.log(data);
                     router.push(ROUTES.viewEmployee + state.employee.id);
                 },
                 onError: (error) => {
@@ -110,9 +104,6 @@ const EmployeeEditPage = () => {
     };
 
     const { employee, resetForm, openConfirm, openLoadingBackdrop } = state;
-
-    //console.log(employee);
-    //console.log(contextState.employeeData);
 
     return (
         <>

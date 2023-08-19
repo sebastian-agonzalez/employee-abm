@@ -2,14 +2,12 @@ import LoadingSpinner from "../loading-spinner/LoadingSpinner";
 import { FiArrowLeftCircle, FiPlusCircle, FiRefreshCw, FiXCircle } from 'react-icons/fi';
 import { ROUTES } from "@/variables/routes";
 import { usePathname, useRouter } from "next/navigation";
-import useAppStore from "@/state/store";
+import useStatsState from "@/custom-hooks/useStatsState";
 
 const ActionStatsBar = () => {
     const router = useRouter();
     const pathName = usePathname();
-    const activeCount = useAppStore((state) => (state.activeCount));
-    const pendingCount = useAppStore((state) => (state.pendingCount));
-    const resetStatsCount = useAppStore((state) => (state.resetStatsCount));
+    const { activeCount, pendingCount, resetStatsCount } = useStatsState();
 
     const buttonBuilder = (path) => {
         switch (path) {
@@ -24,10 +22,10 @@ const ActionStatsBar = () => {
                     <span className="ml-2"><FiArrowLeftCircle size={20} /></span>
                 </button>)
             default:
-                return <button onClick={() => router.push(ROUTES.create)} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
+                return (<button onClick={() => router.push(ROUTES.create)} type="button" className="flex items-center justify-between text-white et-bg-gradient focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
                     <span>Add </span>
                     <span className="ml-2"><FiPlusCircle size={20} /></span>
-                </button>
+                </button>)
         }
     }
 
@@ -42,9 +40,6 @@ const ActionStatsBar = () => {
                                 {activeCount ?
                                     <p>{activeCount}</p>
                                     : <LoadingSpinner size={4} />}
-                                {/* {null ?
-                                    <p>{contextState.currentWorkforceCount}</p>
-                                    : <LoadingSpinner size={4} />} */}
                             </span>
                         </span>
                     </button>
@@ -57,9 +52,6 @@ const ActionStatsBar = () => {
                                 {pendingCount ?
                                     <p>{pendingCount}</p>
                                     : <LoadingSpinner size={4} />}
-                                {/* {null ?
-                                    <p>{contextState.pendingEmployeesCount}</p>
-                                    : <div className="mx-1"><LoadingSpinner size={4} /></div>} */}
                             </span>
                         </span>
                     </button>
