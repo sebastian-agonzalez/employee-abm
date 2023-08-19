@@ -1,18 +1,19 @@
 'use client';
-import { CustomToast, ActionStatsBar, Header } from '@/components';
+import { ActionStatsBar, CustomToast, Header } from '@/components';
 import { ToastNotificationContext } from '@/context/ToastNotificationContext';
-import { useContext, useEffect, useState } from 'react';
-import useAppStore from '@/state/store';
+import useStatsState from '@/custom-hooks/useStatsState';
+import { useContext, useEffect } from 'react';
 import { AiOutlineRotateLeft } from 'react-icons/ai';
 
-
 export default function HomeLayout({ children }) {
-    const currentCount = useAppStore((state) => (state.currentCount));
-    const setCurrentCount = useAppStore((state) => (state.setCurrentCount));
-    const activeCount = useAppStore((state) => (state.activeCount));
-    const setActiveCount = useAppStore((state) => (state.setActiveCount));
-    const pendingCount = useAppStore((state) => (state.pendingCount));
-    const setPendingCount = useAppStore((state) => (state.setPendingCount));
+    const [
+        currentCount,
+        setCurrentCount,
+        activeCount,
+        setActiveCount,
+        pendingCount,
+        setPendingCount,
+    ] = useStatsState();
     const { contextState: toastData, updateContext: setToastData } = useContext(ToastNotificationContext);
 
     useEffect(() => {
