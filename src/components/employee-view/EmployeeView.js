@@ -10,7 +10,7 @@ const EmployeeView = ({ employee }) => {
 
     return (
         <div className="flex justify-center">
-            <div className="w-full max-w-2xl">
+            <div className="w-full md:max-w-2xl max-w-xl overflow-x-scroll">
                 <div className="my-3 p-8 card-shadow bg-white border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                     <HorizontalRouteAnimator>
                         <article className="flex flex-col items-start justify-between">
@@ -28,8 +28,8 @@ const EmployeeView = ({ employee }) => {
                                 </div>
                                 <div>
                                     <div className="bg-gray-100 h-10 hover:bg-gray-300 p-1 transition-all ease-in rounded-full w-10">
-                                        <Link href={`${ROUTES.viewEmployee}${employee.id}/edit`}>
-                                            <button className='flex h-full items-center justify-center w-full'>
+                                        <Link style={{ WebkitTapHighlightColor: 'transparent', }} href={`${ROUTES.viewEmployee}${employee.id}/edit`}>
+                                            <button className='flex h-full items-center justify-center w-full rounded-full outline-none'>
                                                 <FiEdit3 color='blue' size={20} />
                                             </button>
                                         </Link>

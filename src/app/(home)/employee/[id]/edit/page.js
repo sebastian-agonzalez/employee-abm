@@ -141,7 +141,7 @@ const EmployeeEditPage = () => {
             }
             {employee && employee !== null && (
                 <div className="flex justify-center">
-                    <div className="w-full max-w-2xl">
+                    <div className="w-full md:max-w-2xl max-w-xl">
                         <EmployeeForm
                             employeeData={employee}
                             resetForm={resetForm}

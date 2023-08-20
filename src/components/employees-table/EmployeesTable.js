@@ -25,9 +25,9 @@ const EmployeesTable = ({ data }) => {
                                 Registration
                                 Status
                             </th>
-                            <th scope="col" className="px-6 py-3" style={{ width: '40px' }}>
+                            {/* <th scope="col" className="px-6 py-3" style={{ width: '40px' }}>
                                 Employee ID
-                            </th>
+                            </th> */}
                             <th scope="col" className="px-6 py-3">
                                 Name
                             </th>
@@ -52,7 +52,7 @@ const EmployeesTable = ({ data }) => {
                         {
                             employees.map(({ id, name, lastname, beginDate, endDate, registrationStatus, area }, i) => (
                                 <tr key={i + id} className={i === (employees.length - 1) ? "bg-white dark:bg-gray-800" : "bg-white border-b dark:bg-gray-800 dark:border-gray-700"}>
-                                    <td className={"px-6"} style={{ width: '15rem'}}>
+                                    <td className={"px-6"} style={{ width: '100px'}}>
                                         <span>
                                             {registrationStatus}
                                             <div className={'mx-3 rounded-full inline-block p-1 bg-' + (STATUS_COLOR[registrationStatus ?? ""])}>
@@ -60,9 +60,9 @@ const EmployeesTable = ({ data }) => {
                                         </span>
 
                                     </td>
-                                    <td className="px-6 py-4 overflow-hidden" style={{ width: '40px' }}>
+                                    {/* <td className="px-6 py-4 overflow-hidden" style={{ width: '40px' }}>
                                         <p data-tooltip-target="tooltip-animation" className='line-clamp-2'>{id}</p>
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-4">
                                         <p>{name}</p>
                                     </td>

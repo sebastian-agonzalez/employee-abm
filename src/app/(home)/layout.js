@@ -45,13 +45,13 @@ export default function HomeLayout({ children }) {
                     </p>
                 </div>
             </div>
-            <div id='app-content'>
+            <div id='app-content h-screen'>
                 <Header></Header>
                 <main className='h-full my-1 bg-gradient-to-r from-pink-200 to-blue-200 flex flex-col' >
                     <section className='bg-white'>
                         <ActionStatsBar></ActionStatsBar>
                     </section>
-                    <section className='grid-bg h-screen'>
+                    <section className='grid-bg h-full'>
                         <div className='my-6 py-2 h-full w-full'>
                             {children}
                         </div>
