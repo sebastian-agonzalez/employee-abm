@@ -21,7 +21,7 @@ const EmployeesTable = ({ data }) => {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="bg-gradient-to-r from-blue-500 to-pink-700 bg-opacity-10 text-xs text-white uppercase">
                         <tr>
-                            <th scope="col text-blue" className="px-6 py-3">
+                            <th scope="col text-blue" className=" py-3 sm:px-4 md:px-6 lg:px-2">
                                 Registration
                                 Status
                             </th>
@@ -52,7 +52,7 @@ const EmployeesTable = ({ data }) => {
                         {
                             employees.map(({ id, name, lastname, beginDate, endDate, registrationStatus, area }, i) => (
                                 <tr key={i + id} className={i === (employees.length - 1) ? "bg-white dark:bg-gray-800" : "bg-white border-b dark:bg-gray-800 dark:border-gray-700"}>
-                                    <td className={"px-6"} style={{ width: '100px'}}>
+                                    <td className={"pl-4 pr-2"}>
                                         <span>
                                             {registrationStatus}
                                             <div className={'mx-3 rounded-full inline-block p-1 bg-' + (STATUS_COLOR[registrationStatus ?? ""])}>
