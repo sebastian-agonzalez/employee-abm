@@ -13,7 +13,7 @@ const Header = () => {
                 <div className="flex items-center justify-between mx-auto px-3 lg:pt-2">
                     <div className='flex w-1/5 justify-start'>
                         <Link href="/" className="flex items-center">
-                            <p className={`text-3xl font-bold gradient-text`}>EmployeeTracker</p>
+                            <p className={`text-3xl font-bold gradient-text`}>StaffTracker</p>
                         </Link>
                     </div>
                     <div className="w-3/5 flex items-center justify-end text-sm md:text-base">

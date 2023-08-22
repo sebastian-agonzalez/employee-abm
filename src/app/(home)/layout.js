@@ -47,7 +47,7 @@ export default function HomeLayout({ children }) {
             </div>
             <div id='app-content h-screen'>
                 <Header></Header>
-                <main className='h-full my-1 bg-gradient-to-r from-pink-200 to-blue-200 flex flex-col' >
+                <main className='h-screen my-1 bg-gradient-to-r from-pink-200 to-blue-200 flex flex-col' >
                     <section className='bg-white'>
                         <ActionStatsBar></ActionStatsBar>
                     </section>
