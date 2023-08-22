@@ -54,11 +54,10 @@ const EmployeesTable = ({ data }) => {
                                 <tr key={i + id} className={i === (employees.length - 1) ? "bg-white dark:bg-gray-800" : "bg-white border-b dark:bg-gray-800 dark:border-gray-700"}>
                                     <td className={"pl-4 pr-2"}>
                                         <span>
-                                            {registrationStatus}
                                             <div className={'mx-3 rounded-full inline-block p-1 bg-' + (STATUS_COLOR[registrationStatus ?? ""])}>
                                             </div>
+                                            {registrationStatus}
                                         </span>
-
                                     </td>
                                     {/* <td className="px-6 py-4 overflow-hidden" style={{ width: '40px' }}>
                                         <p data-tooltip-target="tooltip-animation" className='line-clamp-2'>{id}</p>
