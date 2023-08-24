@@ -90,8 +90,12 @@ body {
   }
 }
 
- @media screen and (orientation: landscape) {
+@media screen and (orientation: landscape) {
   #portrait-placeholder {
     display: none;
   }
-} 
+}
+
+main {
+    height: inherit;
+}

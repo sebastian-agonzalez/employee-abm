@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className='h-screen'>
+        <html lang="en" className=''>
             <head>
                 <title>StaffTracker</title>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <ApolloProvider client={ApolloService}>
                             <EmployeeDataContextProvider>
-                                <body className={`${inter.className} h-screen`}>
+                                <body className={`${inter.className}`}>
                                     {children}
                                 </body>
                             </EmployeeDataContextProvider>
