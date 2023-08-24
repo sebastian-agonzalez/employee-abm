@@ -88,14 +88,20 @@ body {
   #app-content {
     display: none;
   }
+  #portrait-placeholder {
+    display: flex;
+  }
 }
 
 @media screen and (orientation: landscape) {
   #portrait-placeholder {
     display: none;
   }
+  #app-content {
+    display: block;
+  }
 }
 
 main {
-    height: inherit;
+  height: inherit;
 }
