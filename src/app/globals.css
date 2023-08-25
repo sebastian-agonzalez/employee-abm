@@ -98,10 +98,6 @@ body {
     display: none;
   }
   #app-content {
-    display: block;
+    display: flex;
   }
-}
-
-main {
-  height: inherit;
 }
