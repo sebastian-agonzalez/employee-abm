@@ -29,19 +29,6 @@ export default function HomeLayout({ children }) {
     }, 500);
   };
 
-  // useEffect(() => {
-  //     console.log('úsafect');
-  //     window.addEventListener('orientationchange', () => {
-  //         console.log(`The orientation of the screen is: ${window.orientation}`);
-  //     });
-  // }, [])
-
-  //   useEffect(() => {
-  //     setInterval(() => {
-  //       setShowLoadingScreen(false);
-  //     }, 4500);
-  //   }, []);
-
   useEffect(() => {
     if (!currentCount) {
       setCurrentCount();
@@ -126,18 +113,18 @@ export default function HomeLayout({ children }) {
               <motion.div
                 animate={{ x: "-100%", opacity: 0 }}
                 transition={{
-                  ease: "linear",
+                  ease: "easeOut",
                   duration: 1.5,
-                  //delay: 1,
+                  delay: 1,
                 }}
                 className="h-full w-full bg-zinc-900"
               ></motion.div>
               <motion.div
                 animate={{ x: "100%", opacity: 0 }}
                 transition={{
-                  ease: "linear",
+                  ease: "easeOut",
                   duration: 1.5,
-                  //delay: 1,
+                  delay: 1,
                 }}
                 className="h-full w-full bg-zinc-900"
               ></motion.div>
