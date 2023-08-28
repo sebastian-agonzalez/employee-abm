@@ -3,6 +3,7 @@ import styles from './header.module.css';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import { Avatar } from 'flowbite-react';
 import useAppStore from '@/state/store';
+import AppLogo from '../app-logo/app-logo';
 
 const Header = () => {
     const currentCount = useAppStore((state) => (state.currentCount));
@@ -13,13 +14,13 @@ const Header = () => {
                 <div className="flex items-center justify-between mx-auto px-3 lg:pt-2">
                     <div className='flex w-1/5 justify-start'>
                         <Link href="/" className="flex items-center">
-                            <p className={`text-3xl font-bold gradient-text`}>StaffTracker</p>
+                            <AppLogo />
                         </Link>
                     </div>
                     <div className="w-3/5 flex items-center justify-end text-sm md:text-base">
                         <div className="flex font-medium px-4 pt-2 rounded-lg items-center">
                             <span className="md:mx-1 text-blue-700" aria-current="page">
-                                Actual Workforce:</span>
+                                Current Workforce:</span>
                             <div className='w-4 h-4 flex items-center px-2'>
                                 {currentCount ?
                                     <p>{currentCount}</p>
