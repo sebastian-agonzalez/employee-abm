@@ -19,7 +19,10 @@ module.exports = {
                 warning: '#fbbf24',
                 danger: '#dc2626',
                 success: '#10b981'
-            }
+            },
+            animation: {
+                'pulse-fast': 'pulse 1s infinite', // Adjust the duration as needed
+            },
         },
     },
     plugins: [require("flowbite/plugin")],

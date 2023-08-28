@@ -19,6 +19,7 @@
     "dayjs": "^1.11.8",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.7",
+    "follow-redirects": "^1.15.2",
     "formik": "^2.4.1",
     "framer-motion": "^10.12.17",
     "graphql": "^16.6.0",
