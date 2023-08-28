@@ -5,7 +5,7 @@ module.exports = {
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-        
+
     ],
     theme: {
         extend: {
@@ -14,15 +14,22 @@ module.exports = {
                 'gradient-conic':
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
-        },
-        extend: {
             colors: {
                 primary: '#3a3aac',
                 warning: '#fbbf24',
                 danger: '#dc2626',
                 success: '#10b981'
-            }
-        }
+            },
+            animation: {
+                'pulse-fast': 'pulse 1s infinite', // Adjust the duration as needed
+            },
+        },
     },
     plugins: [require("flowbite/plugin")],
+    safelist: [
+        {
+            pattern:
+                /(bg|text|border)-(primary|warning|danger|success)/,
+        },
+    ]
 }

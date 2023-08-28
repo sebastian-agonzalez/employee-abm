@@ -14,7 +14,7 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-} */ 
+} */
 
 html,
 body {
@@ -74,12 +74,30 @@ body {
 }
 
 .card-shadow-no-animation {
-    position: relative;
-    top: 0;
-    box-shadow: 4.5px 6px 2px 1px rgba(0, 0, 255, 0.155);
+  position: relative;
+  top: 0;
+  box-shadow: 4.5px 6px 2px 1px rgba(0, 0, 255, 0.155);
 }
 
 .card-shadow:hover {
   top: -10px;
   box-shadow: 12px 14px 4px 1px rgba(147, 1, 135, 0.242);
+}
+
+@media screen and (orientation: portrait) {
+  #app-content {
+    display: none;
+  }
+  #portrait-placeholder {
+    display: flex;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  #portrait-placeholder {
+    display: none;
+  }
+  #app-content {
+    display: flex;
+  }
 }

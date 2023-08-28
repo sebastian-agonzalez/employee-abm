@@ -13,10 +13,10 @@ export default function CustomToast({ mode, message, setToastData }) {
 
     setTimeout(() => {
         setToastData({ show: false });
-    }, 4000);
+    }, 6000);
 
     return (
-        <div className="flex flex-col gap-4 fixed bottom-3 right-3  z-50">
+        <div className="flex flex-col gap-4 fixed bottom-3 right-3 z-50 shadow-md">
             <Toast>
                 {mode === TOAST_MODE.success && <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
                     <HiCheck className="h-5 w-5" />

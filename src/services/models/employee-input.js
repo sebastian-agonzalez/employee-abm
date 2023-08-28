@@ -6,7 +6,6 @@ class EmployeeInput {
         this.beginDate = employeeData.beginDate || null
         this.endDate = employeeData.endDate || null
         this.area = employeeData.area || null
-        this.profilePic = employeeData.profilePic || null
     }
 }
 
