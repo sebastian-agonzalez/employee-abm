@@ -9,5 +9,7 @@ import EmployeesTable from "./employees-table/EmployeesTable";
 import LoadingSpinner from "./loading-spinner/LoadingSpinner";
 import Header from "./main-header/Header";
 import CustomToast from "./custom-toast/CustomToast";
+import AppLogo from "./app-logo/app-logo";
+import LoadingScreen from "./loading-screen/LoadingScreen";
 
-export { HorizontalRouteAnimator, LoadingBackdrop, CardLoadingSpinner, ConfirmDialog, ActionStatsBar, EmployeeForm, EmployeeView, EmployeesTable, LoadingSpinner, Header, CustomToast };
+export { HorizontalRouteAnimator, LoadingBackdrop, CardLoadingSpinner, ConfirmDialog, ActionStatsBar, EmployeeForm, EmployeeView, EmployeesTable, LoadingSpinner, Header, CustomToast, AppLogo, LoadingScreen };
