@@ -1,7 +1,6 @@
 "use client";
 
 import { useContext, useEffect } from "react";
-import useStatsState from "@/custom-hooks/useStatsState";
 
 import {
   ActionStatsBar,
@@ -14,6 +13,7 @@ import {
 import { ToastNotificationContext } from "@/context/ToastNotificationContext";
 
 import { AiOutlineRotateLeft } from "react-icons/ai";
+import useAppStore from "@/state/store";
 
 export default function HomeLayout({ children }) {
   const {
@@ -23,7 +23,7 @@ export default function HomeLayout({ children }) {
     setActiveCount,
     pendingCount,
     setPendingCount,
-  } = useStatsState();
+  } = useAppStore();
 
   const { contextState: toastData, updateContext: setToastData } = useContext(
     ToastNotificationContext
