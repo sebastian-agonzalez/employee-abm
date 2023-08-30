@@ -24,7 +24,7 @@ const LoadingScreen = () => {
               duration: 0.8,
               delay: 5,
             }}
-            // onAnimationComplete={handleAnimationEnd}
+            onAnimationComplete={handleAnimationEnd}
             className="absolute top-0 left-0 right-0 h-full w-full bg-gray-200 flex justify-center items-center"
           >
             <div className="animate-pulse-fast">
