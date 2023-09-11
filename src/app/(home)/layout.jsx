@@ -16,36 +16,15 @@ import { AiOutlineRotateLeft } from "react-icons/ai";
 import useAppStore from "@/state/store";
 
 export default function HomeLayout({ children }) {
-  const {
-    currentCount,
-    setCurrentCount,
-    activeCount,
-    setActiveCount,
-    pendingCount,
-    setPendingCount,
-  } = useAppStore();
+  const { setCountStats } = useAppStore();
 
   const { contextState: toastData, updateContext: setToastData } = useContext(
     ToastNotificationContext
   );
 
   useEffect(() => {
-    if (!currentCount) {
-      setCurrentCount();
-    }
-  }, [currentCount]);
-
-  useEffect(() => {
-    if (!activeCount) {
-      setActiveCount();
-    }
-  }, [activeCount]);
-
-  useEffect(() => {
-    if (!pendingCount) {
-      setPendingCount();
-    }
-  }, [pendingCount]);
+    setCountStats();
+  }, []);
 
   return (
     <>

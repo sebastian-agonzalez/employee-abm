@@ -18,7 +18,7 @@ const LoadingScreen = () => {
         {/* logo fadeout */}
         <div className="absolute top-0 left-0 right-0 h-full w-full flex">
           <motion.div
-            animate={{ opacity: 0 }}
+            animate={{ opacity: 0, scale: 10 }}
             transition={{
               ease: "easeIn",
               duration: 0.8,

@@ -1,7 +1,7 @@
 import { fetchActiveEmployeesCount, fetchCurrentEmployeesCount, fetchEmployeeData, fetchPendingEmployeesCount } from '@/services/apollo-service';
 import { create } from 'zustand';
 
-const useAppStore = create((set) => ({
+const useAppStore = create((set, get) => ({
     employeesData: undefined,
     loadingEmployees: false,
     employeeData: undefined,
@@ -9,27 +9,37 @@ const useAppStore = create((set) => ({
     activeCount: null,
     pendingCount: null,
     setEmployeesData: async () => {
-        const response = await fetchEmployeeData();
-        set({ employeesData: response.data });
+        if (!(get().employeesData)) {
+            const res = await fetchEmployeeData()
+            set({ employeesData: res.data });
+        }
     },
     setEmployeeData: (data) => set({ employeeData: data }),
     setCurrentCount: async () => {
-        const response = await fetchCurrentEmployeesCount();
-        set({ currentCount: response.data.currentEmployeesCount.resultCount });
+        if (!(get().currentEmployeesCount)) {
+            const response = await fetchCurrentEmployeesCount();
+            set({ currentCount: response.data.currentEmployeesCount.resultCount });
+        }
     },
     setActiveCount: async () => {
-        const response = await fetchActiveEmployeesCount();
-        set({ activeCount: response.data.activeEmployeesCount.resultCount });
+        if (!(get().activeEmployeesCount)) {
+            const response = await fetchActiveEmployeesCount();
+            set({ activeCount: response.data.activeEmployeesCount.resultCount });
+        }
     },
     setPendingCount: async () => {
-        const response = await fetchPendingEmployeesCount();
-        set({ pendingCount: response.data.pendingEmployeesCount.resultCount });
+        if (!(get().pendingEmployeesCount)) {
+            const response = await fetchPendingEmployeesCount();
+            set({ pendingCount: response.data.pendingEmployeesCount.resultCount });
+        }
     },
+    setCountStats: () => (get().setCurrentCount(), get().setActiveCount(), get().setPendingCount()),
     resetStatsCount: () => {
         set({ employeesData: undefined })
         set({ currentCount: null });
         set({ activeCount: null });
         set({ pendingCount: null });
+        get().setEmployeesData(); get().setCountStats();
     }
 }));
 
