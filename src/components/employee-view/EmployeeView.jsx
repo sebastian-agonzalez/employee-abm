@@ -1,8 +1,11 @@
+import Link from "next/link";
+
 import { REGISTRATION_STATUS } from "@/variables/employee";
 import { ROUTES } from "@/variables/routes";
-import Link from "next/link";
+
 import { FiEdit3 } from "react-icons/fi";
 import { HiExclamation } from "react-icons/hi";
+
 import HorizontalRouteAnimator from "../animator/HorizontalRouteAnimator";
 
 const EmployeeView = ({ employee }) => {
