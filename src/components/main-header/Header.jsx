@@ -1,8 +1,7 @@
 import Link from "next/link";
 import styles from "./header.module.css";
 import AppLogo from "../app-logo/app-logo";
-import CurrentCount from "../current-count/CurrentCount";
-import UserAvatar from "../user-avatar/UserAvatar";
+import { UserAvatar, CurrentCount } from "@/components";
 
 const Header = () => {
   return (

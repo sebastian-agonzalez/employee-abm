@@ -11,5 +11,23 @@ import Header from "./main-header/Header";
 import CustomToast from "./custom-toast/CustomToast";
 import AppLogo from "./app-logo/app-logo";
 import LoadingScreen from "./loading-screen/LoadingScreen";
+import UserAvatar from "./user-avatar/UserAvatar";
+import CurrentCount from "./current-count/CurrentCount";
 
-export { HorizontalRouteAnimator, LoadingBackdrop, CardLoadingSpinner, ConfirmDialog, ActionStatsBar, EmployeeForm, EmployeeView, EmployeesTable, LoadingSpinner, Header, CustomToast, AppLogo, LoadingScreen };
+export {
+    HorizontalRouteAnimator,
+    LoadingBackdrop,
+    CardLoadingSpinner,
+    ConfirmDialog,
+    ActionStatsBar,
+    EmployeeForm,
+    EmployeeView,
+    EmployeesTable,
+    LoadingSpinner,
+    Header,
+    CustomToast,
+    AppLogo,
+    LoadingScreen,
+    UserAvatar,
+    CurrentCount
+};
