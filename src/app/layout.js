@@ -1,13 +1,9 @@
-'use client';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import { ApolloProvider } from '@apollo/client';
-import { ApolloService } from '@/services/apollo-service';
-import EmployeeDataContextProvider from '@/context/employeesDataContext';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { AnimatePresence } from "framer-motion";
-import ToastNotificationContextProvider, { ToastNotificationContext } from '@/context/ToastNotificationContext';
+import ToastNotificationContextProvider from '@/context/ToastNotificationContext';
+import FramerMotionWrapper from '@/components/framer-motion-wrapper/FramerMotionWrapper';
+import DatePickerLocalizationProvider from '@/components/date-picker-localization-provider/DatePickerLocalizationProvider';
+import ApolloClientProvider from '@/components/apollo-client-provider/ApolloClientProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,19 +14,17 @@ export default function RootLayout({ children }) {
                 <title>StaffTracker</title>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
             </head>
-            <AnimatePresence>
-                <ToastNotificationContextProvider>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <ApolloProvider client={ApolloService}>
-                            <EmployeeDataContextProvider>
-                                <body className={`${inter.className}`}>
-                                    {children}
-                                </body>
-                            </EmployeeDataContextProvider>
-                        </ApolloProvider>
-                    </LocalizationProvider>
-                </ToastNotificationContextProvider>
-            </AnimatePresence>
+            <body className={`${inter.className}`}>
+                <FramerMotionWrapper>
+                    <ToastNotificationContextProvider>
+                        <DatePickerLocalizationProvider>
+                            <ApolloClientProvider>
+                                {children}
+                            </ApolloClientProvider>
+                        </DatePickerLocalizationProvider>
+                    </ToastNotificationContextProvider>
+                </FramerMotionWrapper>
+            </body>
         </html>
     )
 }
