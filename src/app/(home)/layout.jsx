@@ -1,30 +1,7 @@
-"use client";
-
-import { useContext, useEffect } from "react";
-
-import {
-  ActionStatsBar,
-  CustomToast,
-  Header,
-  AppLogo,
-  LoadingScreen,
-} from "@/components";
-
-import { ToastNotificationContext } from "@/context/ToastNotificationContext";
-
+import { ActionStatsBar, Header, AppLogo, LoadingScreen } from "@/components";
 import { AiOutlineRotateLeft } from "react-icons/ai";
-import useAppStore from "@/state/store";
 
 export default function HomeLayout({ children }) {
-  const { setCountStats } = useAppStore();
-
-  const { contextState: toastData, updateContext: setToastData } = useContext(
-    ToastNotificationContext
-  );
-
-  useEffect(() => {
-    setCountStats();
-  }, []);
 
   return (
     <>
@@ -53,13 +30,6 @@ export default function HomeLayout({ children }) {
             <div className="my-6"></div>
             <div className="pb-10">{children}</div>
           </section>
-          {toastData?.show && (
-            <CustomToast
-              setToastData={setToastData}
-              mode={toastData.mode}
-              message={toastData.message}
-            ></CustomToast>
-          )}
         </main>
       </div>
       {/*  */}

@@ -1,7 +1,8 @@
 'use client';
 import { CardLoadingSpinner } from "@/components";
 import EmployeeView from "@/components/employee-view/EmployeeView";
-import useEmployeeData from "@/custom-hooks/useEmployeeData";
+// import useEmployeeData from "@/custom-hooks/useEmployeeData";
+import { useEmployee } from "@/services/apollo-service";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -9,7 +10,8 @@ const EmployeeShowPage = () => {
     //always fetch employee data in thei comp
     let employee;
     const params = useParams();
-    const [fetchEmployee, { loading, error, data }] = useEmployeeData(params.id);
+    // const [fetchEmployee, { loading, error, data }] = useEmployeeData(params.id);
+    const [fetchEmployee, { loading, error, data }] = useEmployee(params.id, 'withLazy');
 
     useEffect(() => {
         fetchEmployee();

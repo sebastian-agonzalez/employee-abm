@@ -1,14 +1,21 @@
-import LoadingSpinner from "../loading-spinner/LoadingSpinner";
-import { ROUTES } from "@/variables/routes";
+"use client";
+import { FiArrowLeftCircle, FiPlusCircle, FiRefreshCw, FiXCircle } from 'react-icons/fi';
+import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+
 import useAppStore from "@/state/store";
 
-import { FiArrowLeftCircle, FiPlusCircle, FiRefreshCw, FiXCircle } from 'react-icons/fi';
+import LoadingSpinner from "../loading-spinner/LoadingSpinner";
+import { ROUTES } from "@/variables/routes";
 
 const ActionStatsBar = () => {
     const router = useRouter();
     const pathName = usePathname();
-    const { activeCount, pendingCount, resetStatsCount } = useAppStore();
+    const { setCountStats, activeCount, pendingCount, resetStatsCount } = useAppStore();
+
+    useEffect(() => {
+        setCountStats();
+      }, []);
 
     const buttonBuilder = (path) => {
         switch (path) {

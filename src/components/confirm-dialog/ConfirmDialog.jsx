@@ -1,4 +1,4 @@
-
+"use client";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -21,7 +21,6 @@ const DIALOG_TEXT = {
         body: "An employee register will be modified. Please confirm to proceed."
     }
 }
-
 
 export default function ConfirmDialog({ open, setOpen, handleConfirm, mode }) {
     return (
@@ -49,6 +48,5 @@ export default function ConfirmDialog({ open, setOpen, handleConfirm, mode }) {
                 </div>
             </Dialog>
         </div>
-
     );
 }

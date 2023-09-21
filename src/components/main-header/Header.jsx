@@ -1,3 +1,4 @@
+"use client";
 import Link from 'next/link';
 import styles from './header.module.css';
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
